@@ -1,7 +1,7 @@
 {
   "name": "@ajmey/toaster",
   "version": "0.0.0",
-  "description": "Simple toaster in plain JavaScript for modern browsers.",
+  "description": "Simple toaster in vanilla JavaScript for modern browsers.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,7 +12,11 @@
   },
   "keywords": [
     "toaster",
-    "plain-javascript"
+    "plain-javascript",
+    "ui-component",
+    "ui",
+    "notification",
+    "alert"
   ],
   "author": "AJ Meyghani",
   "license": "MIT",
