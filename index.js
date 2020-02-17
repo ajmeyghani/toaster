@@ -1,5 +1,5 @@
 import defaultStyles from "./default-styles.js";
-import { isString, isPlainObject } from "./value.js";
+import { isString, isPlainObject, isBoolean } from "./value.js";
 
 const DEFAULT_STYLES_NAME = "default_ajmey_toaster";
 const DEFAULT_DISMISS_AFTER = 1500;
@@ -8,6 +8,7 @@ const TYPES = {
   FAILURE: "failure",
   INFO: "info"
 };
+
 let dismissTimeout;
 
 const _addDefaultStyles = () => {
@@ -41,27 +42,29 @@ const clear = () => {
   }
 };
 
-const _createToaster = (message, options, type) => {
-  if (!isString(message) || message === "") {
-    throw new Error("Must provide message.");
-  }
-
-  if (!isString(type) || type === "") {
-    throw new Error("Must provide type.");
-  }
-
-  if (!isPlainObject(options)) {
-    throw new Error("Options should be a plain object.");
-  }
-
-  const validOptions = ["dismiss"];
-
-  const isAllOptionsValid = Object.keys(options).every(o =>
-    validOptions.includes(o)
+const _isValidOptions = options => {
+  const validOptions = ["dismiss", "title"];
+  return (
+    isPlainObject(options) &&
+    Object.keys(options).every(o => validOptions.includes(o))
   );
+};
 
-  if (!isAllOptionsValid) {
-    throw new Error("One or more options provided is not valid.");
+const _createToaster = (message = "", options = {}, type) => {
+  if (!isString(type) || type === "") {
+    throw new Error("Must provide type as a string.");
+  }
+
+  if (!isString(message)) {
+    throw new Error("Expected message to be a string.");
+  }
+
+  if (isBoolean(options) && options === true) {
+    options = {
+      dismiss: DEFAULT_DISMISS_AFTER
+    };
+  } else if (!_isValidOptions(options)) {
+    throw new Error("Options provided is not valid.");
   }
 
   const titlesByType = {
@@ -111,11 +114,11 @@ const _createToaster = (message, options, type) => {
   }
 };
 
-const success = (message, options = {}) => {
+const success = (message, options) => {
   _createToaster(message, options, TYPES.SUCCESS);
 };
 
-const failure = (message, options = {}) => {
+const failure = (message, options) => {
   _createToaster(message, options, TYPES.FAILURE);
 };
 
