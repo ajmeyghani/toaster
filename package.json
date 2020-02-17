@@ -1,0 +1,23 @@
+{
+  "name": "@ajmey/toaster",
+  "version": "0.0.0",
+  "description": "Simple toaster in plain JavaScript for modern browsers.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajmeyghani/js-toaster.git"
+  },
+  "keywords": [
+    "toaster",
+    "plain-javascript"
+  ],
+  "author": "AJ Meyghani",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ajmeyghani/js-toaster/issues"
+  },
+  "homepage": "https://github.com/ajmeyghani/js-toaster#readme"
+}
