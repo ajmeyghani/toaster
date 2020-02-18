@@ -2,7 +2,7 @@
 
 Simple toaster in vanilla JavaScript for modern browser.
 
-## WIP
+## WIP: work in progress, do not use in production.
 
 ## Usage
 
@@ -29,5 +29,7 @@ Both methods has the following signature:
 ### TODO
 
 - [x] Basic toaster working.
-- [ ] Add default styles.
+- [x] Add default styles.
+- [ ] Add a nice default theme.
 - [ ] Allow defining custom themes.
+- [ ] Configure default behavior and options when importing

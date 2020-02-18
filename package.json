@@ -1,6 +1,6 @@
 {
   "name": "@ajmey/toaster",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Simple toaster in vanilla JavaScript for modern browsers.",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ajmeyghani/js-toaster.git"
+    "url": "git+https://github.com/ajmeyghani/toaster.git"
   },
   "keywords": [
     "toaster",
@@ -21,7 +21,7 @@
   "author": "AJ Meyghani",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ajmeyghani/js-toaster/issues"
+    "url": "https://github.com/ajmeyghani/toaster/issues"
   },
-  "homepage": "https://github.com/ajmeyghani/js-toaster#readme"
+  "homepage": "https://github.com/ajmeyghani/toaster#readme"
 }
