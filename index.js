@@ -1,4 +1,4 @@
-import defaultStyles from "./default-styles.js";
+import themes from "./themes.js";
 import { isString, isPlainObject, isBoolean } from "./value.js";
 
 const DEFAULT_STYLES_NAME = "default_ajmey_toaster";
@@ -6,27 +6,27 @@ const DEFAULT_DISMISS_AFTER = 1500;
 const TYPES = {
   SUCCESS: "success",
   FAILURE: "failure",
-  INFO: "info"
+  INFO: "info",
+  WARNING: "warning"
 };
 
 let dismissTimeout;
 
-const _addDefaultStyles = () => {
+const _addDefaultStyles = theme => {
   const head = document.head || document.getElementsByTagName("head")[0];
   const style = document.createElement("style");
   style.setAttribute("data-style-name", DEFAULT_STYLES_NAME);
   head.appendChild(style);
   style.type = "text/css";
-  style.appendChild(document.createTextNode(defaultStyles));
+  const selectedTheme = themes[theme] ? themes[theme] : themes["default"];
+  style.appendChild(document.createTextNode(selectedTheme));
 };
 
 const clear = () => {
-  const toasters = Array.from(
-    document.getElementsByClassName("js-ajmey-toaster")
-  );
+  const toasters = Array.from(document.getElementsByClassName("js-ajmtoaster"));
 
   const dismissButtons = Array.from(
-    document.querySelectorAll(".ajmey-toaster__dismiss")
+    document.querySelectorAll(".js-ajmtoaster__dismiss")
   );
 
   if (dismissButtons.length) {
@@ -43,7 +43,7 @@ const clear = () => {
 };
 
 const _isValidOptions = options => {
-  const validOptions = ["dismiss", "title"];
+  const validOptions = ["dismiss", "title", "theme"];
   return (
     isPlainObject(options) &&
     Object.keys(options).every(o => validOptions.includes(o))
@@ -69,12 +69,17 @@ const _createToaster = (message = "", options = {}, type) => {
 
   const titlesByType = {
     [TYPES.SUCCESS]: "Success!",
-    [TYPES.FAILURE]: "Oops!",
-    [TYPES.INFO]: "Info!"
+    [TYPES.FAILURE]: "Oops...",
+    [TYPES.INFO]: "Info!",
+    [TYPES.WARNING]: "Warning..."
   };
 
   if (!options.title) {
     options.title = titlesByType[type];
+  }
+
+  if (!options.theme) {
+    options.theme = "default";
   }
 
   if (dismissTimeout) {
@@ -86,14 +91,19 @@ const _createToaster = (message = "", options = {}, type) => {
   const fragment = new window.DocumentFragment();
 
   const wrapper = document.createElement("div");
-  wrapper.classList.add("ajmey-toaster");
-  wrapper.classList.add("js-ajmey-toaster");
+  wrapper.classList.add("ajmtoaster");
+  wrapper.classList.add(`theme-${options.theme}`);
+  wrapper.classList.add("js-ajmtoaster");
 
   const toasterTemplate = `
-  <div class="ajmey-toaster__inner --${type}">
-    <p class="ajmey-toaster__title">${options.title}</p>
-    <p class="ajmey-toaster__message">${message}</p>
-    <button class="ajmey-toaster__dismiss">Dismiss</button>
+  <div class="ajmtoaster__inner --${type} theme-${options.theme}">
+    <p class="ajmtoaster__title theme-${options.theme}">${options.title}</p>
+    <p class="ajmtoaster__message theme-${options.theme} ${
+    message ? "with-message" : ""
+  }">${message}</p>
+    <button class="js-ajmtoaster__dismiss ajmtoaster__dismiss theme-${
+      options.theme
+    }">&times;</button>
   </div>
   `;
 
@@ -101,9 +111,12 @@ const _createToaster = (message = "", options = {}, type) => {
   fragment.appendChild(wrapper);
   document.body.appendChild(fragment);
 
-  document
-    .querySelector(".ajmey-toaster__dismiss")
-    .addEventListener("click", clear);
+  const dismissButtons = Array.from(
+    document.querySelectorAll(".js-ajmtoaster__dismiss")
+  );
+  for (const b of dismissButtons) {
+    b.addEventListener("click", clear);
+  }
 
   if (options.dismiss) {
     options.dismiss = Number.isInteger(options.dismiss)
@@ -114,33 +127,52 @@ const _createToaster = (message = "", options = {}, type) => {
   }
 };
 
-const success = (message, options) => {
-  _createToaster(message, options, TYPES.SUCCESS);
+const success = theme => (message, options) => {
+  _createToaster(message, { ...options, theme }, TYPES.SUCCESS);
 };
 
-const failure = (message, options) => {
-  _createToaster(message, options, TYPES.FAILURE);
+const failure = theme => (message, options) => {
+  _createToaster(message, { ...options, theme }, TYPES.FAILURE);
 };
 
-const toaster = {
-  success,
-  failure,
-  clear
+const info = theme => (message, options) => {
+  _createToaster(message, { ...options, theme }, TYPES.INFO);
 };
 
-const _init = () => {
-  window.addEventListener("DOMContentLoaded", event => {
-    const styles = Array.from(document.getElementsByTagName("style"));
-    const isDefaultStyles = Boolean(
-      styles.filter(v => v.dataset.styleName === DEFAULT_STYLES_NAME).length
-    );
+const warning = theme => (message, options) => {
+  _createToaster(message, { ...options, theme }, TYPES.WARNING);
+};
 
-    if (!isDefaultStyles) {
-      _addDefaultStyles();
-    }
-  });
-
+const _themeToaster = theme => {
+  const toaster = {
+    success: success(theme),
+    failure: failure(theme),
+    info: info(theme),
+    warning: warning(theme),
+    clear: clear
+  };
   return toaster;
 };
 
-export default _init();
+const useToaster = (config = {}) => {
+  const defaults = { injectCss: true, theme: "default" };
+  const options = Object.assign(defaults, config);
+  if (options.injectCss) {
+    window.addEventListener("DOMContentLoaded", event => {
+      const styles = Array.from(document.getElementsByTagName("style"));
+      const isDefaultStyles = Boolean(
+        styles.filter(v => v.dataset.styleName === DEFAULT_STYLES_NAME).length
+      );
+
+      if (!isDefaultStyles) {
+        _addDefaultStyles(options.theme);
+      }
+    });
+  }
+
+  return _themeToaster(options.theme);
+};
+
+export default _themeToaster("default");
+
+export { useToaster };

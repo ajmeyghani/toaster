@@ -3,31 +3,74 @@
   <head>
     <meta charset="UTF-8" />
     <title>Example</title>
+    <link
+      rel="stylesheet"
+      href="/node_modules/imperavi-kube/dist/css/kube.min.css"
+    />
+    <link rel="stylesheet" href="/example/main.css" />
+    <!-- <link rel="stylesheet" href="/theme-default.min.css" /> -->
+    <script src="/example/main.js" type="module"></script>
     <style>
-      .page {
-        min-height: 80rem;
-        border: 1px solid;
-        background: gray;
+      .ajmtoaster.theme-default {
+      /*  --ajmt-white: #f6f6f6;
+        --ajmt-success: green;
+        --ajmt-failure: red;
+        --ajmt-warning: yellow;
+        --ajmt-info: blue;*/
       }
     </style>
-    <script src="/example/main.js" type="module"></script>
   </head>
   <body>
-    <p>Hello Toasters!</p>
-    <div>
-      <button id="js-success-button">Success Toast (all options)</button>
-      <button id="js-success-button2">Success Toast (Default Options)</button>
-      <button id="js-success-button3">Success Toast (Default dismiss)</button>
+    <div class="page sections">
+      <h1 class="lead">🍞 Vanilla Toaster</h1>
+      <section>
+        <h4>Success ✅</h4>
+        <div>
+          <button class="button secondary outline" id="js-success-button">
+            Success Toast (all options)
+          </button>
+          <button class="button secondary outline" id="js-success-button2">
+            Success Toast (Default Options)
+          </button>
+          <button class="button secondary outline" id="js-success-button3">
+            Success Toast (Default dismiss)
+          </button>
+        </div>
+      </section>
+      <section>
+        <h4>Failure 🔴</h4>
+        <button class="button secondary outline" id="js-failure-button">
+          Failure Toast
+        </button>
+        <button class="button secondary outline" id="js-failure-button-long">
+          Very Long Text
+        </button>
+      </section>
+      <section>
+        <h4>Info ❕</h4>
+        <button class="button secondary outline" id="js-info-button1">
+          Info 1
+        </button>
+      </section>
+      <section>
+        <h4>Warning ⚠️</h4>
+        <button class="button secondary outline" id="js-warning-button1">
+          Warning 1
+        </button>
+      </section>
+      <section>
+        <h4>Invalid Options ❌</h4>
+        <button class="button secondary outline" id="js-success-button4">
+          Success Toast (Invalid arg)
+        </button>
+      </section>
+      <section>
+        <h4>Clear All 📭</h4>
+        <button class="button secondary outline" id="js-clear-button">
+          Clear
+        </button>
+      </section>
+      <div class="scroll-area">scroll down</div>
     </div>
-    <div>
-      <button id="js-success-button4">Success Toast (Invalid arg)</button>
-    </div>
-    <div>
-      <button id="js-failure-button">Failure Toast</button>
-    </div>
-    <div>
-      <button id="js-clear-button">Clear</button>
-    </div>
-    <div class="page"></div>
   </body>
 </html>

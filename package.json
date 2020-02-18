@@ -1,10 +1,13 @@
 {
   "name": "@ajmey/toaster",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Simple toaster in vanilla JavaScript for modern browsers.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "css-base": "cleancss -o base.min.css base.css",
+    "css-dark": "cleancss -o theme-dark.min.css dark.css base.css",
+    "css-default": "cleancss -o theme-default.min.css default.css base.css"
   },
   "repository": {
     "type": "git",
@@ -23,5 +26,10 @@
   "bugs": {
     "url": "https://github.com/ajmeyghani/toaster/issues"
   },
-  "homepage": "https://github.com/ajmeyghani/toaster#readme"
+  "homepage": "https://github.com/ajmeyghani/toaster#readme",
+  "devDependencies": {
+    "clean-css-cli": "^4.3.0",
+    "imperavi-kube": "^6.5.2"
+  },
+  "dependencies": {}
 }

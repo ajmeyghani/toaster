@@ -1,0 +1,24 @@
+h1 {
+  border-bottom: 1px solid gray;
+  padding-bottom: 1rem;
+}
+.scroll-area {
+  min-height: 80rem;
+  border: 1px dashed;
+  background: white;
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+  font-weight: 100;
+  font-family: sans-serif;
+  margin-top: 2rem;
+}
+.page {
+  padding: 1rem;
+}
+.sections > * {
+  margin-bottom: 1rem;
+}
+.sections > *:last-child {
+  margin-bottom: 0;
+}
