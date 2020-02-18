@@ -29,8 +29,7 @@
   },
   "homepage": "https://github.com/ajmeyghani/toaster#readme",
   "devDependencies": {
-    "clean-css-cli": "^4.3.0",
-    "imperavi-kube": "^6.5.2"
+    "clean-css-cli": "^4.3.0"
   },
   "dependencies": {}
 }

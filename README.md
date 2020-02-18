@@ -19,7 +19,7 @@ Latest and the greatest.
 - Load a theme with a link tag `<link rel="stylesheet" href="node_modules/@ajmey/toaster/theme-default.min.css" />`.
 - Call any toaster that you like, eg `toaster.success("Done!", { dismiss: 1500 })`.
 
-**NOTE**
+### Note
 
 If you don't want to include a CSS file, you can take advantage of `useToaster` to initialize the toaster with injected CSS:
 
@@ -28,6 +28,15 @@ import { useToaster } from "@ajmey/toaster";
 const toaster = useToaster({ theme: "default", injectCss: true });
 toaster.success("Done!");
 ```
+
+### Examples
+
+You can check out more examples in the `example` folder. To run the example, simply run a server in the root of the project:
+
+- `npm i http-server -g`
+- `cd toaster && http-server . -c-1`
+
+and go to `http://localhost:8080/example`.
 
 ## Themes
 
