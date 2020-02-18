@@ -6,6 +6,8 @@ const themeDefault = `
   --ajmt-failure: #f94416;
   --ajmt-info: #0387d7;
   --ajmt-warning: #ffbd02;
+  --ajmt-duration: 300ms;
+  --ajmt-easing: ease-in-out;
 }
 `;
 

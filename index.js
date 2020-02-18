@@ -36,10 +36,24 @@ const clear = () => {
   }
 
   for (const t of toasters) {
-    if (t.parentNode) {
-      t.parentNode.removeChild(t);
-    }
+    t.classList.remove("--active");
   }
+
+  const durations = toasters.map(t =>
+    Number.parseFloat(
+      window.getComputedStyle(t).getPropertyValue("--ajmt-duration")
+    )
+  );
+
+  const maxDuration = window.Math.max(...durations);
+
+  window.setTimeout(() => {
+    for (const t of toasters) {
+      if (t.parentNode) {
+        t.parentNode.removeChild(t);
+      }
+    }
+  }, maxDuration + 100);
 };
 
 const _isValidOptions = options => {
@@ -110,6 +124,9 @@ const _createToaster = (message = "", options = {}, type) => {
   wrapper.insertAdjacentHTML("afterbegin", toasterTemplate);
   fragment.appendChild(wrapper);
   document.body.appendChild(fragment);
+  window.setTimeout(() => {
+    wrapper.classList.add("--active");
+  }, 200);
 
   const dismissButtons = Array.from(
     document.querySelectorAll(".js-ajmtoaster__dismiss")

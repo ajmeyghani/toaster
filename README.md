@@ -48,6 +48,9 @@ const toaster = useToaster({ theme: "light", injectCss: true });
   --ajmt-failure: red;
   --ajmt-warning: yellow;
   --ajmt-info: blue;
+  /* transition properties */
+  --ajmt-duration: 400ms;
+  --ajmt-easing: ease-in-out;
 }
 ```
 
@@ -72,6 +75,9 @@ toaster.success("hello");
     --ajmt-failure: red;
     --ajmt-warning: yellow;
     --ajmt-info: blue;
+    /* transition properties */
+    --ajmt-duration: 400ms;
+    --ajmt-easing: ease-in-out;
   }
 </style>
 ```
@@ -174,4 +180,4 @@ There are two ways that you can initialize a toaster object:
 - [x] Allow defining custom themes.
 - [x] Add docs on how to override styles.
 - [x] Configure default behavior and options when importing.
-- [ ] Add animations for default theme.
+- [x] Add animations for default theme.

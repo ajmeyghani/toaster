@@ -1,7 +1,7 @@
 // import toaster from "/index.js";
 
 import { useToaster } from "/index.js";
-const toaster = useToaster();
+const toaster = useToaster({theme: "default"});
 
 const successButton = document.querySelector("#js-success-button");
 successButton.addEventListener("click", () => {

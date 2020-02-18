@@ -1,13 +1,14 @@
 {
   "name": "@ajmey/toaster",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Simple toaster in vanilla JavaScript for modern browsers.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "css-base": "cleancss -o base.min.css base.css",
     "css-dark": "cleancss -o theme-dark.min.css dark.css base.css",
-    "css-default": "cleancss -o theme-default.min.css default.css base.css"
+    "css-default": "cleancss -o theme-default.min.css default.css base.css",
+    "cssmin": "yarn css-base && yarn css-dark && yarn css-default"
   },
   "repository": {
     "type": "git",

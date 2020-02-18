@@ -7,8 +7,9 @@ const darkTheme = `
   --ajmt-failure: #6f1010;
   --ajmt-warning: #795615;
   --ajmt-info: #191977;
+  --ajmt-duration: 300ms;
+  --ajmt-easing: ease-in-out;
 }
-
 `;
 
 export default darkTheme;

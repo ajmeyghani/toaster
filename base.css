@@ -5,6 +5,18 @@
   right: 10px;
 
   z-index: 999999;
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+.ajmtoaster,
+.ajmtoaster.--active {
+  transition: transform var(--ajmt-duration) var(--ajmt-easing) 0ms, opacity var(--ajmt-duration) var(--ajmt-easing) 50ms;
+}
+
+.ajmtoaster.--active {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .ajmtoaster__inner {
