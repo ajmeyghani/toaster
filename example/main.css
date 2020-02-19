@@ -22,3 +22,16 @@ h1 {
 .sections > *:last-child {
   margin-bottom: 0;
 }
+
+.hspaced {
+  display: flex;
+  flex-direction: row;
+}
+
+.hspaced > * {
+  margin-right: 1rem;
+}
+
+.hspaced > *:last-child {
+  margin-right: 0;
+}

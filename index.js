@@ -1,5 +1,5 @@
 import themes from "./themes.js";
-import { isString, isPlainObject, isBoolean } from "./value.js";
+import { isString, isPlainObject, isBoolean, isUndefined } from "./value.js";
 
 const DEFAULT_STYLES_NAME = "default_ajmey_toaster";
 const DEFAULT_DISMISS_AFTER = 1500;
@@ -77,7 +77,11 @@ const _newToast = (message = "", config, type, theme = "default") => {
     dismiss: false
   };
 
-  const options = Object.assign(defaults, config);
+  const options = {...defaults, ...config};
+
+  if (!options.title) {
+    options.title = defaults.title;
+  }
 
   if (!isString(message)) {
     throw new Error(
@@ -149,16 +153,21 @@ const _newToast = (message = "", config, type, theme = "default") => {
 
 const _newToaster = (theme = "default") => {
   const toaster = {
-    success: (message, config = {}) =>
-      _newToast(
+    success: (message, config = {}) => {
+      return _newToast(
         message,
-        { ...config, dismiss: config.dismiss || true },
+        {
+          ...config,
+          dismiss: isUndefined(config.dismiss) ? true : config.dismiss
+        },
         TYPES.SUCCESS,
         theme
-      ),
+      );
+    },
     failure: (message, config = {}) =>
       _newToast(message, config, TYPES.FAILURE, theme),
-    info: (message, config = {}) => _newToast(message, config, TYPES.INFO, theme),
+    info: (message, config = {}) =>
+      _newToast(message, config, TYPES.INFO, theme),
     warning: (message, config = {}) =>
       _newToast(message, config, TYPES.WARNING, theme),
     clear

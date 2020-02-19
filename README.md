@@ -190,6 +190,7 @@ There are two ways that you can initialize a toaster object:
 - [x] Add docs on how to override styles.
 - [x] Configure default behavior and options when importing.
 - [x] Add animations for default theme.
+- [ ] Add note about loading with a script tag.
 - [ ] Make it easier to maintain CSS styles in css or js implementations.
 - [ ] Testem browser testing ?
 - [ ] Add build task.
