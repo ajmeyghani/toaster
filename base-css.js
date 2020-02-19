@@ -1,4 +1,12 @@
 const baseStyles = `
+.ajmtoaster,
+.ajmtoaster__inner,
+.ajmtoaster__title,
+.ajmtoaster__message,
+.ajmtoaster__dismiss {
+  box-sizing: border-box;
+}
+
 .ajmtoaster {
   position: fixed;
   width: 325px;
@@ -12,7 +20,8 @@ const baseStyles = `
 
 .ajmtoaster,
 .ajmtoaster.--active {
-  transition: transform var(--ajmt-duration) var(--ajmt-easing) 0ms, opacity var(--ajmt-duration) var(--ajmt-easing) 50ms;
+  transition: transform var(--ajmt-duration) var(--ajmt-easing) 0ms,
+    opacity var(--ajmt-duration) var(--ajmt-easing) 50ms;
 }
 
 .ajmtoaster.--active {
@@ -71,7 +80,7 @@ const baseStyles = `
 }
 
 .ajmtoaster__message {
-  line-height: 1.3
+  line-height: 1.3;
 }
 
 .ajmtoaster__message {
@@ -113,7 +122,7 @@ const baseStyles = `
 
 .ajmtoaster__dismiss,
 .ajmtoaster__dismiss:hover {
-  transition: background-color 200ms ease-in-out
+  transition: background-color 200ms ease-in-out;
 }
 
 .ajmtoaster__dismiss {
