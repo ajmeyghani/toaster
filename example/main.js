@@ -18,7 +18,7 @@ successButton2.addEventListener("click", () => {
 
 const successButton3 = document.querySelector("#js-success-button3");
 successButton3.addEventListener("click", () => {
-  toaster.success("nice!", true);
+  toaster.success("nice!");
 });
 
 const successButton4 = document.querySelector("#js-success-button4");

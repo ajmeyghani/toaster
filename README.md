@@ -17,7 +17,7 @@ Latest and the greatest.
 - Install by `yarn add @ajmey/toaster`, or `npm i @ajmey/toaster --save`.
 - Load the toaster instance `import toaster from "@ajmey/toaster`".
 - Load a theme with a link tag `<link rel="stylesheet" href="node_modules/@ajmey/toaster/theme-default.min.css" />`.
-- Call any toaster that you like, eg `toaster.success("Done!", { dismiss: 1500 })`.
+- Call any toast that you like, eg `toaster.success("Done!", { dismiss: 1500 })`.
 
 ### Note
 
@@ -190,3 +190,7 @@ There are two ways that you can initialize a toaster object:
 - [x] Add docs on how to override styles.
 - [x] Configure default behavior and options when importing.
 - [x] Add animations for default theme.
+- [ ] Make it easier to maintain CSS styles in css or js implementations.
+- [ ] Testem browser testing ?
+- [ ] Add build task.
+- [ ] Add gh pages branch.
