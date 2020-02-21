@@ -5,10 +5,10 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "css-base": "cleancss -o themes/base.min.css base.css",
-    "css-dark": "cleancss -o themes/theme-dark.min.css dark.css base.css",
-    "css-default": "cleancss -o themes/theme-default.min.css default.css base.css",
-    "cssmin": "yarn css-base && yarn css-dark && yarn css-default",
+    "css-base": "cleancss -o themes/base.min.css src/base.css",
+    "css-dark": "cleancss -o themes/theme-dark.min.css src/dark.css src/base.css",
+    "css-default": "cleancss -o themes/theme-default.min.css src/default.css src/base.css",
+    "css": "rm -rf themes && mkdir themes && yarn css-base && yarn css-dark && yarn css-default",
     "clean": "rm -rf gh-pages/{src,themes}",
     "copy": "cp -r src gh-pages && cp -r themes gh-pages",
     "gh": "yarn clean && yarn copy && gh-pages -d ./gh-pages"
@@ -20,10 +20,13 @@
   "keywords": [
     "toaster",
     "plain-javascript",
+    "vanilla-javascript",
     "ui-component",
     "ui",
     "notification",
-    "alert"
+    "alert",
+    "toast",
+    "toaster"
   ],
   "author": "AJ Meyghani",
   "license": "MIT",

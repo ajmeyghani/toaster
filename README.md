@@ -29,15 +29,6 @@ const toaster = useToaster({ theme: "default", injectCss: true });
 toaster.success("Done!");
 ```
 
-### Examples
-
-You can check out more examples in the `example` folder. To run the example, simply run a server in the root of the project:
-
-- `npm i http-server -g`
-- `cd toaster && http-server . -c-1`
-
-and go to `http://localhost:8080/example`.
-
 ## Themes
 
 You can override the colors of the toaster by including your own css after the toaster's css. For example, if you want to create a `light` theme, you can do:
@@ -190,9 +181,8 @@ There are two ways that you can initialize a toaster object:
 - [x] Add docs on how to override styles.
 - [x] Configure default behavior and options when importing.
 - [x] Add animations for default theme.
-- [ ] Add note about loading with a script tag.
+- [x] Add gh pages
 - [ ] Make it easier to maintain CSS styles in css or js implementations.
-- [ ] Testem browser testing ?
-- [ ] Add build task.
-- [ ] Add gh pages branch.
+- [ ] Testem browser testing: testem, test cafe ?
+- [ ] Add build task to bundle up and minify js.
 - [ ] Add different types of animation?
