@@ -1,0 +1,39 @@
+h1 {
+  border-bottom: 1px solid gray;
+  padding-bottom: 1rem;
+}
+.scroll-area {
+  min-height: 80rem;
+  border: 1px dashed;
+  background: white;
+  display: flex;
+  justify-content: center;
+  padding-top: 15px;
+  font-weight: 100;
+  font-family: sans-serif;
+  margin-top: 2rem;
+}
+.page {
+  padding: 1rem;
+  width: 960px;
+  margin: 0 auto;
+}
+.sections > * {
+  margin-bottom: 1rem;
+}
+.sections > *:last-child {
+  margin-bottom: 0;
+}
+
+.hspaced {
+  display: flex;
+  flex-direction: row;
+}
+
+.hspaced > * {
+  margin-right: 1rem;
+}
+
+.hspaced > *:last-child {
+  margin-right: 0;
+}
