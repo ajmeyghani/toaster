@@ -141,7 +141,6 @@ const baseStyles = `
 .ajmtoaster__dismiss:focus {
   outline: 0;
 }
-
 `;
 
 export default baseStyles;

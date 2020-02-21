@@ -15,6 +15,8 @@ h1 {
 }
 .page {
   padding: 1rem;
+  width: 960px;
+  margin: 0 auto;
 }
 .sections > * {
   margin-bottom: 1rem;

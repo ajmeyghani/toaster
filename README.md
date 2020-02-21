@@ -195,3 +195,4 @@ There are two ways that you can initialize a toaster object:
 - [ ] Testem browser testing ?
 - [ ] Add build task.
 - [ ] Add gh pages branch.
+- [ ] Add different types of animation?
