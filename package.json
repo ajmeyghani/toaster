@@ -9,7 +9,9 @@
     "css-dark": "cleancss -o themes/theme-dark.min.css dark.css base.css",
     "css-default": "cleancss -o themes/theme-default.min.css default.css base.css",
     "cssmin": "yarn css-base && yarn css-dark && yarn css-default",
-    "gh": "gh-pages -b master -d ./public"
+    "clean": "rm -rf gh-pages/{src,themes}",
+    "copy": "cp -r src gh-pages && cp -r themes gh-pages",
+    "gh": "yarn clean && yarn copy && gh-pages -d ./gh-pages"
   },
   "repository": {
     "type": "git",

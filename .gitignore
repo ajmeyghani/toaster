@@ -1,6 +1,8 @@
 # dist
 /dist
 /dist-dev
+gh-pages/src
+gh-pages/themes
 
 # Logs
 logs
