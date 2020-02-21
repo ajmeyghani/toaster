@@ -9,9 +9,7 @@
     "css-dark": "cleancss -o themes/theme-dark.min.css src/dark.css src/base.css",
     "css-default": "cleancss -o themes/theme-default.min.css src/default.css src/base.css",
     "css": "rm -rf themes && mkdir themes && yarn css-base && yarn css-dark && yarn css-default",
-    "clean": "rm -rf gh-pages/{src,themes}",
-    "copy": "cp -r src gh-pages && cp -r themes gh-pages",
-    "gh": "yarn clean && yarn copy && gh-pages -d ./gh-pages"
+    "gh": "gh-pages --dist ./ --src '{src/**,themes/**,gh-pages/**}'"
   },
   "repository": {
     "type": "git",

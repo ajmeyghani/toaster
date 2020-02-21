@@ -1,6 +1,6 @@
-// import toaster from "./src/index.js";
+// import toaster from "../src/index.js";
 
-import { useToaster } from "./src/index.js";
+import { useToaster } from "../src/index.js";
 const toaster = useToaster({ theme: "default" });
 
 const app = new Vue({
