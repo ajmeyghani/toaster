@@ -64,7 +64,7 @@ const _isValidOptions = options => {
   );
 };
 
-const _newToast = (message = "", config, type, theme = "default") => {
+const _newToast = (message = "", config, type, theme, animation) => {
   const titlesByType = {
     [TYPES.SUCCESS]: "Success!",
     [TYPES.FAILURE]: "Oops...",
@@ -77,7 +77,7 @@ const _newToast = (message = "", config, type, theme = "default") => {
     dismiss: false
   };
 
-  const options = {...defaults, ...config};
+  const options = { ...defaults, ...config };
 
   if (!options.title) {
     options.title = defaults.title;
@@ -114,6 +114,7 @@ const _newToast = (message = "", config, type, theme = "default") => {
   wrapper.classList.add("ajmtoaster");
   wrapper.classList.add(`theme-${theme}`);
   wrapper.classList.add("js-ajmtoaster");
+  wrapper.classList.add(`--animation-${animation}`);
 
   const toasterTemplate = `
   <div class="ajmtoaster__inner --${type} theme-${theme}">
@@ -151,7 +152,7 @@ const _newToast = (message = "", config, type, theme = "default") => {
   return wrapper;
 };
 
-const _newToaster = (theme = "default") => {
+const _newToaster = (theme = "default", animation = "appear") => {
   const toaster = {
     success: (message, config = {}) => {
       return _newToast(
@@ -161,15 +162,16 @@ const _newToaster = (theme = "default") => {
           dismiss: isUndefined(config.dismiss) ? true : config.dismiss
         },
         TYPES.SUCCESS,
-        theme
+        theme,
+        animation
       );
     },
     failure: (message, config = {}) =>
-      _newToast(message, config, TYPES.FAILURE, theme),
+      _newToast(message, config, TYPES.FAILURE, theme, animation),
     info: (message, config = {}) =>
-      _newToast(message, config, TYPES.INFO, theme),
+      _newToast(message, config, TYPES.INFO, theme, animation),
     warning: (message, config = {}) =>
-      _newToast(message, config, TYPES.WARNING, theme),
+      _newToast(message, config, TYPES.WARNING, theme, animation),
     clear
   };
 
@@ -177,7 +179,7 @@ const _newToaster = (theme = "default") => {
 };
 
 const useToaster = (config = {}) => {
-  const defaults = { injectCss: true, theme: "default" };
+  const defaults = { injectCss: true, theme: "default", animation: "appear" };
   const options = Object.assign(defaults, config);
 
   if (options.injectCss) {
@@ -193,7 +195,7 @@ const useToaster = (config = {}) => {
     });
   }
 
-  return _newToaster(options.theme);
+  return _newToaster(options.theme, options.animation);
 };
 
 export default _newToaster();

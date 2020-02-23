@@ -12,21 +12,40 @@ const baseStyles = `
   width: 325px;
   top: 10px;
   right: 10px;
-
   z-index: 999999;
+}
+
+.ajmtoaster.--animation-appear,
+.ajmtoaster.--animation-appear.--active {
+    transition: transform var(--ajmt-duration) var(--ajmt-easing) 0ms,
+    opacity var(--ajmt-duration) var(--ajmt-easing) 50ms;
+}
+
+.ajmtoaster.--animation-appear {
   opacity: 0;
   transform: scale(1.1);
 }
 
-.ajmtoaster,
-.ajmtoaster.--active {
-  transition: transform var(--ajmt-duration) var(--ajmt-easing) 0ms,
+.ajmtoaster.--animation-appear.--active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+.ajmtoaster.--animation-slide-down,
+.ajmtoaster.--animation-slide-down.--active {
+    transition: transform var(--ajmt-duration) var(--ajmt-easing) 0ms,
     opacity var(--ajmt-duration) var(--ajmt-easing) 50ms;
 }
 
-.ajmtoaster.--active {
+.ajmtoaster.--animation-slide-down {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.ajmtoaster.--animation-slide-down.--active {
   opacity: 1;
-  transform: scale(1);
+  transform: translateY(0);
 }
 
 .ajmtoaster__inner {
