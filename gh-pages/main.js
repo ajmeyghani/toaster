@@ -1,7 +1,9 @@
 // import toaster from "../src/index.js";
 
 import { useToaster } from "../src/index.js";
-const toaster = useToaster({ theme: "default" });
+const toaster = useToaster({ theme: "default", animation: "slide-down" });
+
+toaster.success("Good job, you are running the gh-pages successfully!.", { dismiss: false });
 
 const app = new Vue({
   el: "#app",
@@ -10,18 +12,22 @@ const app = new Vue({
     title: "",
     dismiss: "",
     toaster: toaster,
-    options: "{}",
+    options: "{}"
   },
   mounted() {
     this.$watch(
       vm => [vm.title, vm.message, vm.dismiss],
       val => {
         this.dismiss = Number(this.dismiss);
-        this.options = JSON.stringify({title: val[0], dismiss: val[2]}, null, 2)
+        this.options = JSON.stringify(
+          { title: val[0], dismiss: val[2] },
+          null,
+          2
+        );
       },
       {
-        immediate: true, // run immediately
-        deep: true // detects changes inside objects. not needed here, but maybe in other cases
+        immediate: true,
+        deep: true
       }
     );
   },
