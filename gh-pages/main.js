@@ -1,18 +1,14 @@
-// import toaster from "../src/index.js";
+import docsTemplate from "./docs.tpl.js";
 
-import { useToaster } from "../src/index.js";
-const toaster = useToaster({ theme: "default", animation: "slide-down" });
-
-toaster.success("Good job, you are running the gh-pages successfully!.", { dismiss: false });
-
-const app = new Vue({
-  el: "#app",
-  data: {
-    message: "",
-    title: "",
-    dismiss: "",
-    toaster: toaster,
-    options: "{}"
+Vue.component("docs", {
+  data: function() {
+    return {
+      message: "",
+      title: "",
+      dismiss: "",
+      toaster: window.toaster,
+      options: "{}"
+    };
   },
   mounted() {
     this.$watch(
@@ -31,11 +27,9 @@ const app = new Vue({
       }
     );
   },
-  methods: {
-    // success: function (message, options) {
-    //   return this.toaster.success(message, options)
-    // },
-  }
+  template: docsTemplate
 });
+
+new Vue({ el: "#app" });
 
 window.app = app;
