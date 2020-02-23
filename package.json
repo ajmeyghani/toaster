@@ -1,6 +1,6 @@
 {
   "name": "@ajmey/toaster",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "Simple toaster in vanilla JavaScript for modern browsers.",
   "main": "src/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "css-default": "cleancss -o themes/theme-default.min.css src/default.css src/base.css",
     "css": "rm -rf themes && mkdir themes && yarn css-base && yarn css-dark && yarn css-default",
     "gh": "gh-pages --dist ./ --src '{src/**,themes/**,gh-pages/**}'",
-      "prep": "yarn css && yarn gh"
+    "prep": "yarn css && yarn gh"
   },
   "repository": {
     "type": "git",
