@@ -1,6 +1,8 @@
 # dist
 /dist
 /dist-dev
+/esm
+/umd
 gh-pages/src
 gh-pages/themes
 
