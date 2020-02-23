@@ -8,7 +8,7 @@ Simple toaster in vanilla JavaScript for modern browsers.
 
 ## Why
 
-I was looking for a very simple toaster, but I couldn't find one. Most of the toasters out there pack a lot of features that I didn't need. This toaster is very simple, it only shows one toast at a time. Also, it's very lightweight (< 2kb gzipped), has zero dependencies, and is written for modern browsers. The CSS is also very well organized, you can easily override it or used it to create new themes and animations with no hassle.
+I was looking for a very simple toaster, but I couldn't find one. Most of the toasters out there pack a lot of features that I didn't need. This toaster is very simple, it only shows one toast at a time. Also, it's very lightweight (< 2kb gzipped), has zero dependencies, and is written for modern browsers. The CSS is also very well organized, you can easily override it or use it to create new themes and animations with no hassle.
 
 ## Browser Support
 
@@ -190,7 +190,7 @@ Every single class above have a theme modifier as well, in the form of `.[classn
 - `.ajmtoaster__inner.--success.theme-dark`
 - etc
 
-## Module Formats
+## Modules
 
 This package is available both in ES and UMD format:
 
@@ -239,11 +239,12 @@ All the UMD formats are available in the `node_modules/@ajmey/toaster/umd`. When
 - Open `http://localhost:8080/gh-pages/` to see the examples. If you don't have `http-server` installed, you can install it with `npm i -g http-server`.
 - Run `yarn css` to minify all the CSS files and output the `themes` folder.
 - In order to support CSS injection and separate CSS files, make sure to update `src/*.css` files first, and then update `src/*.css.js` equivalent files.
+- Run `yarn build` to build both the css and js.
 
 ## Maintainer
 
 - To update `gh-pages` run `yarn gh`.
-- Run `npm run prep && npm version patch|minor|major && npm publish --access=public` to publish the latest version.
+- Run `yarn build && yarn prep && npm version patch|minor|major && npm publish --access=public` to publish the latest version.
 
 ## TODO
 
