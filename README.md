@@ -103,6 +103,21 @@ There are two ways that you can initialize a toaster object:
     toaster.success("Hello!");
     ```
 
+### `esm/core.js`
+
+This file only includes the JavaScript and it exports a single function `newToaster` that has the same signature as `useToaster`. Except that it doesn't recognize the `injectCss` option.
+
+```js
+import newToaster from "@ajmey/toaster/esm/core";
+const toaster = newToaster({theme: "dark", animation: "slide-down"});
+```
+
+If you load the module using this method, you need to make sure to include a theme file:
+
+```html
+<link rel="stylesheet" href="node_modules/@ajmey/toaster/themes/theme-default.min.css">
+```
+
 ## Themes
 
 You can override the colors of the toaster by including your own css after the toaster's css. For example, if you want to create a `light` theme, you can do:
