@@ -16,7 +16,7 @@
     "js": "NODE_ENV=production rollup --config rollup.config.js && gzip -k esm/* umd/*",
     "build": "yarn css && yarn js",
     "gh": "gh-pages --dist ./ --src '{src/**,themes/**,gh-pages/**}'",
-    "prep": "yarn css && yarn gh"
+    "prep": "yarn build && yarn gh"
   },
   "repository": {
     "type": "git",
