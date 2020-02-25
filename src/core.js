@@ -11,8 +11,9 @@ const TYPES = {
 
 let dismissTimeout;
 
-const clear = () => {
+const clear = toaster => {
   const toasts = Array.from(document.getElementsByClassName("js-ajmtoaster"));
+  let count = toasts.length;
 
   const dismissButtons = Array.from(
     document.querySelectorAll(".js-ajmtoaster__dismiss")
@@ -36,13 +37,17 @@ const clear = () => {
 
   const maxDuration = window.Math.max(...durations);
 
-  window.setTimeout(() => {
-    for (const t of toasts) {
-      if (t.parentNode) {
-        t.parentNode.removeChild(t);
+  return new Promise((r, j) => {
+    window.setTimeout(() => {
+      for (const t of toasts) {
+        if (t.parentNode) {
+          t.parentNode.removeChild(t);
+        }
       }
-    }
-  }, maxDuration + 100);
+      r(count);
+
+    }, maxDuration + 100);
+  });
 };
 
 const _isValidOptions = options => {
@@ -144,7 +149,7 @@ const newToaster = (opt = {}) => {
   const defaults = { theme: "defaults", animation: "appear" };
   const { theme, animation } = { ...defaults, ...opt };
 
-  return {
+  const toaster = {
     success: (message, config = {}) => {
       return _makeToast(
         message,
@@ -162,9 +167,12 @@ const newToaster = (opt = {}) => {
     info: (message, config = {}) =>
       _makeToast(message, config, TYPES.INFO, theme, animation),
     warning: (message, config = {}) =>
-      _makeToast(message, config, TYPES.WARNING, theme, animation),
-    clear
+      _makeToast(message, config, TYPES.WARNING, theme, animation)
   };
+
+  toaster.clear = (toaster) => clear(toaster);
+
+  return toaster;
 };
 
 export default newToaster;

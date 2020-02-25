@@ -59,7 +59,7 @@ const template = `
   </section>
 
   <section class="sections">
-    <button v-on:click="toaster.clear()" class="button is-outlined">Clear Toaster</button>
+    <button v-on:click="toaster.clear().then(r => console.log(r))" class="button is-outlined">Clear Toaster</button>
     <pre>toaster.clear()</pre>
   </section>
 </div>

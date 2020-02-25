@@ -67,7 +67,7 @@ toaster.info();
 
 `clear()`:
 
-If you want to clear the active toast, simply call `toaster.clear()`.
+If you want to clear the active toast, simply call `toaster.clear()`. Returns a promise when the toasts are removed. Resolves with the number of toasts removed.
 
 ### `Initialization`
 
