@@ -1,7 +1,14 @@
 import { isString, isPlainObject, isBoolean, isUndefined } from "./value.js";
 
 const DEFAULT_DISMISS_AFTER = 1500;
-const validOptions = ["dismiss", "title"];
+const validOptions = ["dismiss", "title", "onMount"];
+const _isValidOptions = options => {
+  return (
+    isPlainObject(options) &&
+    Object.keys(options).every(o => validOptions.includes(o))
+  );
+};
+
 const TYPES = {
   SUCCESS: "success",
   FAILURE: "failure",
@@ -10,6 +17,7 @@ const TYPES = {
 };
 
 let dismissTimeout;
+const wrappers = [];
 
 const clear = toaster => {
   const toasts = Array.from(document.getElementsByClassName("js-ajmtoaster"));
@@ -44,20 +52,16 @@ const clear = toaster => {
           t.parentNode.removeChild(t);
         }
       }
+
       r(count);
+      wrappers.length = 0;
 
     }, maxDuration + 100);
   });
 };
 
-const _isValidOptions = options => {
-  return (
-    isPlainObject(options) &&
-    Object.keys(options).every(o => validOptions.includes(o))
-  );
-};
-
-const _makeToast = (message = "", config, type, theme, animation) => {
+const _makeToast = (message = "", config, type, theme, animation, toaster) => {
+  console.log(toaster, "success");
   const titlesByType = {
     [TYPES.SUCCESS]: "Success!",
     [TYPES.FAILURE]: "Oops...",
@@ -67,7 +71,8 @@ const _makeToast = (message = "", config, type, theme, animation) => {
 
   const defaults = {
     title: titlesByType[type],
-    dismiss: false
+    dismiss: false,
+    onMount: () => "onMounted event"
   };
 
   const options = { ...defaults, ...config };
@@ -122,9 +127,12 @@ const _makeToast = (message = "", config, type, theme, animation) => {
   wrapper.insertAdjacentHTML("afterbegin", toasterTemplate);
   fragment.appendChild(wrapper);
   document.body.appendChild(fragment);
-  window.setTimeout(() => {
-    wrapper.classList.add("--active");
-  }, 200);
+
+  wrappers.push(wrapper);
+  console.log(wrappers);
+  var event = new Event('onMount');
+  wrapper.addEventListener("onMount", options.onMount);
+  wrapper.dispatchEvent(event);
 
   const dismissButtons = Array.from(
     document.querySelectorAll(".js-ajmtoaster__dismiss")
@@ -142,14 +150,20 @@ const _makeToast = (message = "", config, type, theme, animation) => {
     dismissTimeout = window.setTimeout(clear, options.dismiss);
   }
 
-  return wrapper;
+  return new Promise(r => {
+    window.setTimeout(() => {
+      wrapper.classList.add("--active");
+      r(wrapper);
+    }, 200);
+  });
 };
 
 const newToaster = (opt = {}) => {
   const defaults = { theme: "defaults", animation: "appear" };
-  const { theme, animation } = { ...defaults, ...opt };
+  const options = Object.assign(defaults, opt);
 
   const toaster = {
+    options,
     success: (message, config = {}) => {
       return _makeToast(
         message,
@@ -158,19 +172,20 @@ const newToaster = (opt = {}) => {
           dismiss: isUndefined(config.dismiss) ? true : config.dismiss
         },
         TYPES.SUCCESS,
-        theme,
-        animation
+        options.theme,
+        options.animation,
+        toaster,
       );
     },
     failure: (message, config = {}) =>
-      _makeToast(message, config, TYPES.FAILURE, theme, animation),
+      _makeToast(message, config, TYPES.FAILURE, options.theme, options.animation),
     info: (message, config = {}) =>
-      _makeToast(message, config, TYPES.INFO, theme, animation),
+      _makeToast(message, config, TYPES.INFO, options.theme, options.animation),
     warning: (message, config = {}) =>
-      _makeToast(message, config, TYPES.WARNING, theme, animation)
+      _makeToast(message, config, TYPES.WARNING, options.theme, options.animation)
   };
 
-  toaster.clear = (toaster) => clear(toaster);
+  toaster.clear = () => clear(toaster);
 
   return toaster;
 };
