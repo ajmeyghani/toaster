@@ -61,7 +61,6 @@ const clear = toaster => {
 };
 
 const _makeToast = (message = "", config, type, theme, animation, toaster) => {
-  console.log(toaster, "success");
   const titlesByType = {
     [TYPES.SUCCESS]: "Success!",
     [TYPES.FAILURE]: "Oops...",
@@ -129,10 +128,9 @@ const _makeToast = (message = "", config, type, theme, animation, toaster) => {
   document.body.appendChild(fragment);
 
   wrappers.push(wrapper);
-  console.log(wrappers);
-  var event = new Event('onMount');
-  wrapper.addEventListener("onMount", options.onMount);
-  wrapper.dispatchEvent(event);
+  // var event = new Event('onMount');
+  // wrapper.addEventListener("onMount", options.onMount);
+  // wrapper.dispatchEvent(event);
 
   const dismissButtons = Array.from(
     document.querySelectorAll(".js-ajmtoaster__dismiss")
