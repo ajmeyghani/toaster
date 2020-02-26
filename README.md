@@ -2,9 +2,11 @@
 
 Simple toaster in vanilla JavaScript for modern browsers.
 
-**Check out the [demo](https://ajmeyghani.github.io/toaster/gh-pages/) page.**
+>##Work in progress, do not use in production. The API is not stable.##
 
-## Work in progress, do not use in production.
+## DEMO
+
+**Check out the [demo](https://ajmeyghani.github.io/toaster/gh-pages/) page.** You can use it to play around with different kinds of toasts.
 
 ## Why
 
@@ -50,12 +52,14 @@ The `toaster` object has the following methods for invoking a toast:
 
 The above methods all have the following signature:
 
-`<toastType>(message: string, options: object):`
+`[toastType](message: string, options: object): Promise<DOM Node>`
 
 - `message`: `string` the message to show
 - `options`: `object` plain object defining the options
     - `options.dismiss`: `number` auto dismiss a toast after `dismiss` milliseconds. If the value is falsy, auto-dismiss is disabled. Success toasts are automatically dismissed after `1500` ms. Other types of toasts are not dismissed automatically.
     - `options.title`: `string` title to be used for the toast. Default titles are: Success, Oops, Info, and Warning.
+
+**Return Value**: Each method will return a `promise` that resolves to the wrapper DOM element holding the toaster. The wrapper node is useful if you use set `dismiss` to `false` because you will have access to the wrapper node at that point.
 
 **Examples:**
 
@@ -63,11 +67,19 @@ The above methods all have the following signature:
 toaster.failure("This is the message body". { title: "Error!", dismiss: false});
 toaster.success("Todo item was created!");
 toaster.info();
+toaster.failure("Something went wrong", { dismiss: false})
+  .then(wrapperNode => console.log(wrapperNode));
 ```
 
 `clear()`:
 
 If you want to clear the active toast, simply call `toaster.clear()`. Returns a promise when the toasts are removed. Resolves with the number of toasts removed.
+
+**Example**
+
+```js
+toaster.clear().then(count => console.log("cleared toasters: ", count));
+```
 
 ### `Initialization`
 
