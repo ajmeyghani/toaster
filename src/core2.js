@@ -1,15 +1,15 @@
 import { isString, isPlainObject, isBoolean, isUndefined } from "./value.js";
 
 /*
-  Idea: use a closure to keep track of toasters created. We only want to keep
-  one reference, so when an application uses a toaster from multiple files,
-  there is always going to be one ref.
+  The way it is right now, even if imported by more than one, there will
+  be ever one instance of the toaster.
 */
 
 function newToaster() {
   let tId = 0;
   const toaster = {
     success(message) {
+      console.log(message);
       return "success toast: " + message;
     }
   };
@@ -18,25 +18,16 @@ function newToaster() {
 
   return function instance(options) {
     console.log("count ", tId);
-    if (tId > 0) {
-      return;
-    }
+    // if (tId > 0) {
+    //   return;
+    // }
 
     tId += 1;
     return toaster;
   };
 }
 
-const newToaster = (message) => "toast: " + message;
 
-const toaster = {
-  success(message) {
-    return "success" + message;
-  }
-};
+const toaster = newToaster();
 
-export default toaster;
-
-export {
-  newToaster
-}
+export default toaster();
