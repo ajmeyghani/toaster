@@ -11,8 +11,8 @@
 
 
       /* ESM: loading only the core. */
-      // import newToaster from "../src/core.js";
-      // window.toaster = newToaster({animation: "slide-down"});
+      import newToaster from "../src/core.js";
+      window.toaster = newToaster({animation: "slide-down"});
 
       /* ESM: Allows overriding initialization options */
       // import { useToaster } from "../src/use-toaster.js";
@@ -31,20 +31,15 @@
       // window.toaster = useToaster({ animation: "slide-down" });
 
       /* Success example */
-      // toaster.success("Good job, you are running the gh-pages successfully!.", {
-      //   dismiss: false
-      // });
+      toaster.success("Good job, you are running the gh-pages successfully!.", {
+        dismiss: false
+      });
 
     </script>
     <link rel="stylesheet" href="./main.css" />
     <script src="./vue.min.js"></script>
     <script type="module" src="./main.js"></script>
     <script type="module" src="./main2.js"></script>
-    <style data-style-name="mystyles">
-      p {
-        color: red;
-      }
-    </style>
     <title>Vanilla Toaster</title>
   </head>
   <body>

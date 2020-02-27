@@ -12,7 +12,8 @@ const isBoolean = v => typeof v === "boolean";
 
 const isSymbol = v => typeof v === "symbol";
 
-const isObject = v => typeof v !== "function" && typeof v === "object";
+const isObj = v =>
+  typeof v !== "function" && typeof v === "object" && !isNull(v);
 
 const isPlainObject = v =>
   Object.prototype.toString.call(v) === "[object Object]";
@@ -29,6 +30,9 @@ const isTruthy = v => {
   return false;
 };
 
+const isInstance = (i, f) =>
+  isObj(i) && Reflect.getPrototypeOf(i) === f.prototype;
+
 export {
   UNDEFINED,
   isUndefined,
@@ -37,9 +41,10 @@ export {
   isString,
   isBoolean,
   isSymbol,
-  isObject,
+  isObj,
   isPlainObject,
   isFunction,
   isAbsent,
-  isTruthy
+  isTruthy,
+  isInstance
 };

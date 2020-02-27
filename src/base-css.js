@@ -105,7 +105,7 @@ const baseStyles = `
 .ajmtoaster__message {
   max-width: 100%;
   max-height: 100px;
-  overflow: scroll;
+  overflow: auto;
   margin-top: 0;
 
   font-size: 80%;
