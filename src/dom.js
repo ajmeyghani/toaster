@@ -1,12 +1,11 @@
-const makeToast = (
-  type,
-  title,
-  theme,
-  animation,
-  wrapperClass = "ajmtoaster",
-  wrapper = document.createElement("div")
-) => {
+const makeToast = (o, wrapperClass = "ajmtoaster") => {
+  if (!o) {
+    throw new Error("Need to pass {type, title, theme, animation, message}");
+  }
+
   const fragment = new window.DocumentFragment();
+  const wrapper = document.createElement("div");
+  const {theme, animation, type, title, message} = o;
 
   wrapper.classList.add(wrapperClass);
   wrapper.classList.add(`theme-${theme}`);
@@ -33,4 +32,10 @@ const insertToast = (wrapper, fragment, toasterTemplate) => {
   return wrapper;
 };
 
-export { makeToast, insertToast };
+const toast = (o) => {
+  const {wrapper, fragment, toasterTemplate} = makeToast(o);
+  insertToast(wrapper, fragment, toasterTemplate);
+  return wrapper;
+};
+
+export default toast;

@@ -1,5 +1,5 @@
 import { isUndefined, isInstance } from "./value.js";
-import {makeToast, insertToast} from "./dom.js";
+import toast from "./dom.js";
 import {loadedStyles, injectStyles} from "./style.js";
 
 /*
@@ -74,7 +74,9 @@ function Toaster(o) {
 }
 
 function success(message, o) {
-  console.log(message, { toasterConfig: this.config, passedOptions: o });
+  // console.log(message, { toasterConfig: this.config, passedOptions: o });
+  const wrapper = toast({theme: "default", type: "success", animation: "appear", title: "boo", message: "body"});
+  wrapper.classList.add("--active")
 }
 
 function failure(message, o) {

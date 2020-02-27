@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="./bulma-0.8.0/css/bulma.min.css " />
-    <link rel="stylesheet" href="../themes/theme-default.min.css">
+    <!-- <link rel="stylesheet" href="../themes/theme-default.min.css"> -->
     <!-- <script src="../umd/index.js"></script> -->
     <!-- <script src="../umd/use-toaster.js"></script> -->
     <script type="module">
@@ -11,8 +11,8 @@
 
 
       /* ESM: loading only the core. */
-      import newToaster from "../src/core.js";
-      window.toaster = newToaster({animation: "slide-down"});
+      // import newToaster from "../src/core.js";
+      // window.toaster = newToaster({animation: "slide-down"});
 
       /* ESM: Allows overriding initialization options */
       // import { useToaster } from "../src/use-toaster.js";
@@ -31,14 +31,14 @@
       // window.toaster = useToaster({ animation: "slide-down" });
 
       /* Success example */
-      toaster.success("Good job, you are running the gh-pages successfully!.", {
-        dismiss: false
-      });
+      // toaster.success("Good job, you are running the gh-pages successfully!.", {
+      //   dismiss: false
+      // });
 
     </script>
     <link rel="stylesheet" href="./main.css" />
     <script src="./vue.min.js"></script>
-    <script type="module" src="./main.js"></script>
+    <!-- <script type="module" src="./main.js"></script> -->
     <script type="module" src="./main2.js"></script>
     <title>Vanilla Toaster</title>
   </head>
