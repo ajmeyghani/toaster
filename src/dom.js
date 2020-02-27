@@ -36,7 +36,6 @@ const insertToast = (wrapper, fragment, toasterTemplate) => {
 };
 
 const toast = o => {
-  console.log(o);
   if (dismissTimeout) {
     window.clearTimeout(dismissTimeout);
   }

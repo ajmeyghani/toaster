@@ -1,13 +1,6 @@
 import { isUndefined, isInstance, isString } from "./value.js";
 import { toast, clearToasts } from "./dom.js";
-import { loadedStyles, injectStyles } from "./style.js";
-
-/*TODO
-  The main file has already injected, if they dont mention injectCSS we should
-  assume false. If a toaster is created and injectCSS is false, the later code
-  will override, and it will remove injected code. So absence of injectCss means
-  no css will be injected to the document.
-*/
+import { loadedStyles, injectStyles, removeInjectedStyles } from "./style.js";
 
 Toaster.symbol = Symbol("#toaster");
 Toaster.version = "1.0.0";
@@ -25,9 +18,9 @@ Toaster.titles = {
   [Toaster.WARNING]: "Warning..."
 };
 
-function Toaster(o) {
+function Toaster(o, isUseToaster) {
   if (!isInstance(this, Toaster)) {
-    return new Toaster(o);
+    return new Toaster(o, isUseToaster);
   }
 
   const defaults = {
@@ -36,7 +29,7 @@ function Toaster(o) {
     animation: "appear"
   };
 
-  this.config = { ...defaults, ...o };
+  this.config = { ...defaults, ...o, isUseToaster };
 
   if (this.config.injectCss) {
     if (!loadedStyles()) {
@@ -45,7 +38,17 @@ function Toaster(o) {
   }
 }
 
+const useToaster = (o) => {
+  return Toaster(o, true);
+};
+
 const callToast = (type, message, config, o) => {
+  if (config.isUseToaster && !config.injectCss) {
+    if (loadedStyles()) {
+      removeInjectedStyles();
+    }
+  }
+
   if (!isString(message)) {
     message = "";
   }
@@ -100,4 +103,4 @@ Object.assign(Toaster.prototype, {
 
 export default Toaster({ theme: "default", injectCss: true });
 
-export { Toaster, Toaster as useToaster /* alias */ };
+export { useToaster };

@@ -19,4 +19,9 @@ const injectStyles = theme => {
   });
 };
 
-export { DEFAULT_STYLES_NAME, injectStyles, loadedStyles };
+const removeInjectedStyles = () => {
+  const styles = loadedStyles();
+  styles.parentNode.removeChild(styles);
+};
+
+export { DEFAULT_STYLES_NAME, injectStyles, loadedStyles, removeInjectedStyles };
