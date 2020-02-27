@@ -7,6 +7,8 @@
 // toaster.success("app 1 is here", { dismiss: 1500 });
 
 import toaster from "../src/core2.js";
-toaster.success("You created the application successfully!", { dismiss: 1500 });
+window.toaster = toaster;
+toaster.success();
+console.log(toaster)
 
 export default 1;

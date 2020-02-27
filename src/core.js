@@ -55,7 +55,6 @@ const clear = toaster => {
 
       r(count);
       wrappers.length = 0;
-
     }, maxDuration + 100);
   });
 };
@@ -172,15 +171,27 @@ const newToaster = (opt = {}) => {
         TYPES.SUCCESS,
         options.theme,
         options.animation,
-        toaster,
+        toaster
       );
     },
     failure: (message, config = {}) =>
-      _makeToast(message, config, TYPES.FAILURE, options.theme, options.animation),
+      _makeToast(
+        message,
+        config,
+        TYPES.FAILURE,
+        options.theme,
+        options.animation
+      ),
     info: (message, config = {}) =>
       _makeToast(message, config, TYPES.INFO, options.theme, options.animation),
     warning: (message, config = {}) =>
-      _makeToast(message, config, TYPES.WARNING, options.theme, options.animation)
+      _makeToast(
+        message,
+        config,
+        TYPES.WARNING,
+        options.theme,
+        options.animation
+      )
   };
 
   toaster.clear = () => clear(toaster);
