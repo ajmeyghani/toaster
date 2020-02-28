@@ -24,4 +24,9 @@ const removeInjectedStyles = () => {
   styles.parentNode.removeChild(styles);
 };
 
-export { DEFAULT_STYLES_NAME, injectStyles, loadedStyles, removeInjectedStyles };
+export {
+  DEFAULT_STYLES_NAME,
+  injectStyles,
+  loadedStyles,
+  removeInjectedStyles
+};

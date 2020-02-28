@@ -39,7 +39,9 @@ const toast = o => {
   if (dismissTimeout) {
     window.clearTimeout(dismissTimeout);
   }
+
   clearToasts();
+
   const { wrapper, fragment, toasterTemplate } = makeToastNode(o);
   insertToast(wrapper, fragment, toasterTemplate);
 
@@ -53,7 +55,6 @@ const toast = o => {
 
   if (o.dismiss) {
     o.dismiss = Number.isInteger(o.dismiss) ? o.dismiss : DEFAULT_DISMISS_AFTER;
-
     dismissTimeout = window.setTimeout(clearToasts, o.dismiss);
   }
 
@@ -91,7 +92,7 @@ const clearToasts = () => {
 
   const maxDuration = window.Math.max(...durations);
 
-  return new Promise((r, j) => {
+  return new Promise(r => {
     window.setTimeout(() => {
       for (const t of toasts) {
         if (t.parentNode) {

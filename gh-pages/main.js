@@ -1,35 +1,7 @@
-import docsTemplate from "./docs.tpl.js";
+import toaster, { useToaster } from "../src/index.js";
 
-Vue.component("docs", {
-  data: function() {
-    return {
-      message: "",
-      title: "",
-      dismiss: "",
-      toaster: window.toaster,
-      options: "{}"
-    };
-  },
-  mounted() {
-    this.$watch(
-      vm => [vm.title, vm.message, vm.dismiss],
-      val => {
-        this.dismiss = Number(this.dismiss);
-        this.options = JSON.stringify(
-          { title: val[0], dismiss: val[2] },
-          null,
-          2
-        );
-      },
-      {
-        immediate: true,
-        deep: true
-      }
-    );
-  },
-  template: docsTemplate
-});
+// window.toaster = window.ajmtoaster.default;
 
-new Vue({ el: "#app" });
-
-window.app = app;
+// window.toaster = toaster;
+// window.toaster = useToaster();
+// window.toaster = useToaster({ theme: "dark", animation: "slide-down" });

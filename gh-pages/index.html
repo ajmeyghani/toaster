@@ -3,44 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="./bulma-0.8.0/css/bulma.min.css " />
-    <link rel="stylesheet" href="../themes/theme-dark.min.css">
+    <link rel="stylesheet" href="./docs.css" />
+    <!-- <link rel="stylesheet" href="../themes/theme-dark.min.css"> -->
     <!-- <script src="../umd/index.js"></script> -->
     <!-- <script src="../umd/use-toaster.js"></script> -->
-    <script type="module">
-        import toaster from "../src/core2.js";
-        window.toaster = toaster;
-
-
-        // import { useToaster } from "../src/core2.js";
-        // window.toaster2 = useToaster({ theme: "dark", animation: "slide-down" });
-
-
-      /* ESM: Allows overriding initialization options */
-      // import { useToaster } from "../src/core2.js";
-      // const toaster = useToaster({
-      //   injectCss: false,
-      //   animation: "slide-down",
-      //   theme: "dark",
-      // });
-      // window.toaster = toaster;
-
-      /* UMD: umd/index.js */
-      // window.toaster = window.ajmtoaster.default;
-
-      /* UMD: umd/use-toaster.js */
-      // const { useToaster } = window.ajmtoaster;
-      // window.toaster = useToaster({ animation: "slide-down" });
-
-      /* Success example */
-      // toaster.success("Good job, you are running the gh-pages successfully!.", {
-      //   dismiss: false
-      // });
-
-    </script>
-    <link rel="stylesheet" href="./main.css" />
     <script src="./vue.min.js"></script>
     <script type="module" src="./main.js"></script>
-    <!-- <script type="module" src="./main2.js"></script> -->
+    <script type="module" src="./docs.js"></script>
     <title>Vanilla Toaster</title>
   </head>
   <body>
