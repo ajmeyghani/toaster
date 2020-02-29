@@ -2,18 +2,16 @@
   "name": "@ajmey/toaster",
   "version": "0.3.0",
   "description": "Simple toaster in vanilla JavaScript for modern browsers.",
-  "main": "esm/index.js",
-  "exports": {
-    "./": "./esm"
-  },
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "clean": "rm -rf dist",
+    "clean": "rm -rf dist index* core*",
     "css-base": "cleancss -o themes/base.min.css src/base.css",
     "css-dark": "cleancss -o themes/theme-dark.min.css src/dark.css src/base.css",
     "css-default": "cleancss -o themes/theme-default.min.css src/default.css src/base.css",
     "css": "rm -rf themes && mkdir themes && yarn css-base && yarn css-dark && yarn css-default && gzip -k themes/*",
-    "js": "NODE_ENV=production rollup --config rollup.config.js && gzip -k esm/index.min.js",
+    "js": "NODE_ENV=production rollup --config rollup.config.js && cp esm/{index*,core*} . && gzip -k esm/*",
+    "prebuild": "yarn clean",
     "build": "yarn css && yarn js",
     "gh": "gh-pages --dist ./ --src '{src/**,themes/**,gh-pages/**}'",
     "prep": "yarn build && yarn gh"
@@ -23,8 +21,10 @@
     "url": "git+https://github.com/ajmeyghani/toaster.git"
   },
   "files": [
-    "/src",
-    "/esm",
+    "/index.js",
+    "/index.min.js",
+    "/core.js",
+    "/core.min.js",
     "/themes",
     "/umd",
     "/LICENSE",
@@ -49,12 +49,15 @@
   },
   "homepage": "https://github.com/ajmeyghani/toaster#readme",
   "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/preset-env": "^7.8.6",
     "@rollup/plugin-commonjs": "^11.0.2",
     "@rollup/plugin-node-resolve": "^7.1.1",
     "@rollup/plugin-replace": "^2.3.1",
     "clean-css-cli": "^4.3.0",
     "gh-pages": "^2.2.0",
     "rollup": "^1.31.1",
+    "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-clear": "^2.0.7",
     "rollup-plugin-terser": "^5.2.0"
   },

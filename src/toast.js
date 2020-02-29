@@ -3,7 +3,7 @@ const DEFAULT_DISMISS_AFTER = 1500;
 
 const makeToastNode = (o, wrapperClass = "ajmtoaster") => {
   if (!o) {
-    throw new Error("Need to pass {type, title, theme, animation, message}");
+    throw new Error("Need to pass options object.");
   }
 
   const fragment = new window.DocumentFragment();

@@ -3,6 +3,8 @@ const template = `
   <h1 class="subtitle is-2">🍞 Vanilla Toaster</h1>
   <h2 class="subtitle is-4">Make a Toast</h2>
 
+  <slot></slot>
+
   <section>
     <button
       v-on:click="toaster.success(message, {dismiss, title})"

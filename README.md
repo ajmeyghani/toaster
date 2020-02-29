@@ -270,6 +270,9 @@ All the UMD formats are available in the `node_modules/@ajmey/toaster/umd`. When
 - [x] Add gh pages
 - [x] Add different types of animation?
 - [x] Add build task to bundle up and minify js, webpack?
+- [ ] Allow animation type in doc page.
+- [ ] Make doc page for each way the module can be loaded/imported.
+- [ ] For umd build, transpile -> es5
 - [ ] Add events
 - [ ] Make it easier to maintain CSS styles in css or js implementations.
 - [ ] Testem browser testing: testem, test cafe ?

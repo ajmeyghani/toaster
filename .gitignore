@@ -1,4 +1,6 @@
 # dist
+/index*
+/core*
 /dist
 /dist-dev
 /esm

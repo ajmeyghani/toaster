@@ -4,20 +4,17 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="./bulma-0.8.0/css/bulma.min.css" />
     <link rel="stylesheet" href="./docs.css" />
-    <link rel="stylesheet" href="../themes/theme-default.min.css">
+    <script src="../umd/index.js"></script>
     <script src="./vue.min.js"></script>
-    <script type="module">
-      import toaster from "../core.min.js";
-      window.toaster = toaster;
+    <script>
+      window.toaster = window.ajmtoaster.default;
     </script>
     <script type="module" src="./docs.js"></script>
     <title>Vanilla Toaster</title>
   </head>
   <body>
     <div id="app" class="page">
-      <docs>
-        <pre>You can use this example on how to load the Toaster with CSS and JS separate.</pre>
-      </docs>
+      <docs></docs>
     </div>
   </body>
 </html>

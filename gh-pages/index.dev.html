@@ -4,11 +4,14 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="./bulma-0.8.0/css/bulma.min.css" />
     <link rel="stylesheet" href="./docs.css" />
-    <link rel="stylesheet" href="../themes/theme-default.min.css">
+    <!-- <link rel="stylesheet" href="../themes/theme-default.min.css"> -->
     <script src="./vue.min.js"></script>
     <script type="module">
-      import toaster from "../core.min.js";
-      window.toaster = toaster;
+      // import toaster from "../src/index.js";
+      import { useToaster } from "../src/core.js";
+      window.toaster = useToaster({ injectCss: true }); /* if using core to load, must provide an injectStyle function */
+      // window.toaster = toaster;
+
     </script>
     <script type="module" src="./docs.js"></script>
     <title>Vanilla Toaster</title>
@@ -16,7 +19,7 @@
   <body>
     <div id="app" class="page">
       <docs>
-        <pre>You can use this example on how to load the Toaster with CSS and JS separate.</pre>
+        <pre>Index for dev testing.</pre>
       </docs>
     </div>
   </body>

@@ -1,4 +1,3 @@
-import themes from "./themes.js";
 const DEFAULT_STYLES_NAME = "default_ajmey_toaster";
 
 const loadedStyles = (styleName = DEFAULT_STYLES_NAME) => {
@@ -6,7 +5,7 @@ const loadedStyles = (styleName = DEFAULT_STYLES_NAME) => {
   return styles.find(v => v.dataset.styleName === styleName);
 };
 
-const injectStyles = theme => {
+const injectStyles = themes => theme => {
   window.addEventListener("DOMContentLoaded", event => {
     const head = document.head || document.getElementsByTagName("head")[0];
     const style = document.createElement("style");
