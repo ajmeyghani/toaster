@@ -1,4 +1,4 @@
-import { isUndefined, isInstance, isString, isFunction } from "./value.js";
+import { isUndefined, isString, isFunction } from "./value.js";
 import { toast, clearToasts } from "./toast.js";
 import { loadedStyles, removeInjectedStyles, injectStyles } from "./style.js";
 
@@ -19,42 +19,41 @@ Toaster.titles = {
   [Toaster.WARNING]: "Warning..."
 };
 
-function Toaster(o = {}, injectStyles) {
-  if (!isInstance(this, Toaster)) {
-    return new Toaster(o, injectStyles);
+function Toaster(o = {}, injectFn) {
+  if (isFunction(injectFn) && !injectFn.ajmStyleInjector) {
+    throw new Error("Provided css injector function is not valid.");
   }
 
   const defaults = {
     injectCss: false,
     theme: "default",
     animation: "appear",
-    verifyImport: false,
   };
 
   this.config = { ...defaults, ...o };
+  this.config.injectFn = injectFn;
 
   if (this.config.injectCss) {
-    if (!loadedStyles()) {
-      injectStyles(this.config.theme);
-    }
+    removeInjectedStyles();
+    injectFn(this.config.theme);
   }
 }
 
-const useToaster = (o, inject) =>
-  new Toaster(
-    o,
-    isFunction(inject) ? inject : injectStyles({ default: "" })
-  );
+const useToaster = (o, injectFn) => new Toaster(o, injectFn);
 
 const callToast = (type, message, config, o) => {
-  /* if not supposed to have injected css, remove it.
-   * Set by user using `options.verifyImport`.
-   */
-  if (config.verifyImport && !config.injectCss) {
-    if (loadedStyles()) {
-      removeInjectedStyles();
-    }
-  }
+  /*
+  * TODO: It's ok, but find a better solution to handle this.
+  * Calling removeStyles here in case the user
+  * is using multiple instances of a toaster using
+  * different initialization methods.
+  * Also it would be nice to have an event to call this
+  * right before the toast is going to appear on the page.
+  */
+   removeInjectedStyles();
+   if (config.injectCss) {
+    config.injectFn(config.theme);
+   }
 
   if (!isString(message)) {
     message = "";
@@ -108,6 +107,5 @@ Object.assign(Toaster.prototype, {
   clear
 });
 
-export default useToaster();
-
-export { useToaster };
+export default useToaster;
+export { useToaster, injectStyles };

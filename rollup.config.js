@@ -82,8 +82,10 @@ const makeBuildConfig = format => module => {
 const modules = [
   "index",
   "index.min",
-  "core",
-  "core.min"
+  "toaster",
+  "toaster.min",
+  "themes",
+  "themes.min"
 ];
 
 const buildEsModules = modules.map(makeBuildConfig("esm"));

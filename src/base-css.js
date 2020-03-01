@@ -79,10 +79,7 @@ const baseStyles = `
   background: var(--ajmt-info);
 }
 
-.ajmtoaster__inner.--success,
-.ajmtoaster__inner.--failure,
-.ajmtoaster__inner.--warning,
-.ajmtoaster__inner.--info {
+.ajmtoaster__inner {
   color: var(--ajmt-white);
 }
 

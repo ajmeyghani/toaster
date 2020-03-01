@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./bulma-0.8.0/css/bulma.min.css" />
+    <link rel="stylesheet" href="./docs.css" />
+    <link rel="stylesheet" href="../themes/base.min.css">
+    <style>
+      .ajmtoaster.theme-fancy,
+      .ajmtoaster.theme-default {
+        --ajmt-white: #fff;
+        --ajmt-success: green;
+        --ajmt-failure: red;
+        --ajmt-warning: yellow;
+        --ajmt-info: blue;
+        /* transition properties */
+        --ajmt-duration: 400ms;
+        --ajmt-easing: ease-in-out;
+      }
+      .ajmtoaster__inner.theme-fancy.--warning {
+        color: orange;
+      }
+    </style>
+    <script src="./vue.min.js"></script>
+    <script type="module">
+      import { useToaster } from "../src/core.js";
+      window.toaster = useToaster({ animation: "slide-down", theme: "fancy" });
+    </script>
+    <script type="module" src="./docs.js"></script>
+    <title>Vanilla Toaster</title>
+  </head>
+  <body>
+    <div id="app" class="page">
+      <docs>
+        <p>In this example, we are using the <code>core</code> to just load the JS. Also, we are loading the base css and then overriding our own css.</p>
+      </docs>
+    </div>
+  </body>
+</html>
