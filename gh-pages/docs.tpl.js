@@ -7,24 +7,28 @@ const template = `
 
   <section>
     <button
+      id="test-success-button"
       v-on:click="toaster.success(message, {dismiss, title})"
       class="button is-success"
     >
       Success
     </button>
     <button
+      id="test-failure-button"
       v-on:click="toaster.failure(message, {dismiss, title})"
       class="button is-danger"
     >
       Failure
     </button>
     <button
+      id="test-info-button"
       v-on:click="toaster.info(message, {dismiss, title})"
       class="button is-info"
     >
       Info
     </button>
     <button
+      id="test-warning-button"
       v-on:click="toaster.warning(message, {dismiss, title})"
       class="button is-warning"
     >

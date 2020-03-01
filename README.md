@@ -254,11 +254,12 @@ With an ideal setup, that is `esm/toaster.min.js.gz` and `themes/theme-default.m
 - Install yarn with `npm i -g yarn`.
 - Install dependencies with `yarn install`.
 - Update code in the `src/` folder.
-- Run the examples (gh-pages) locally: `http-server . -c-1`
-- Open `http://localhost:8080/gh-pages/` to see the examples. If you don't have `http-server` installed, you can install it with `npm i -g http-server`.
+- Run the examples (gh-pages) locally: `yarn serverd`
+- Open `http://localhost:8081/gh-pages/index.dev*.html` to see the examples.
 - Run `yarn css` to minify all the CSS files and output the `themes` folder.
 - In order to support CSS injection and separate CSS files, make sure to update `src/*.css` files first, and then update `src/*.css.js` equivalent files.
 - Run `yarn build` to build both the css and js.
+- To run the e2e tests in watch mode, run `yarn server && yarn e2ew`. TestCafe will start testing whats served at 8080. The difference between 8080 and 8081 is that 8081 is for development (no caching), but 8080 has some caching so that TestCafe can work.
 
 ## Maintainer
 

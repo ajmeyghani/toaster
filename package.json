@@ -4,7 +4,9 @@
   "description": "Simple toaster in vanilla JavaScript for modern browsers.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "e2e": "testcafe chrome e2e/a.js --disable-page-caching",
+    "e2ew": "yarn e2e --live --dev --colors",
+    "t": "yarn test",
     "clean": "rm -rf dist index* toaster*",
     "css-base": "cleancss -o themes/base.min.css src/base.css",
     "css-dark": "cleancss -o themes/theme-dark.min.css src/dark.css src/base.css",
@@ -15,7 +17,9 @@
     "build": "yarn css && yarn js",
     "gh": "gh-pages --dist ./ --src '{src/**,themes/**,gh-pages/**}'",
     "prep": "yarn build && yarn gh",
-    "gzip": "gzip -k esm/* && gzip -k umd/* && gzip -k themes"
+    "gzip": "gzip -k esm/* && gzip -k umd/* && gzip -k themes",
+    "server": "http-server -p 8080",
+    "serverd": "http-server -p 8081 -c-1"
   },
   "repository": {
     "type": "git",
@@ -59,10 +63,12 @@
     "@rollup/plugin-replace": "^2.3.1",
     "clean-css-cli": "^4.3.0",
     "gh-pages": "^2.2.0",
+    "http-server": "^0.12.1",
     "rollup": "^1.31.1",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-clear": "^2.0.7",
-    "rollup-plugin-terser": "^5.2.0"
+    "rollup-plugin-terser": "^5.2.0",
+    "testcafe": "^1.8.2"
   },
   "dependencies": {}
 }
