@@ -23,7 +23,7 @@
     </style>
     <script src="./vue.min.js"></script>
     <script type="module">
-      import { useToaster } from "../src/core.js";
+      import { useToaster } from "../src/toaster.js";
       window.toaster = useToaster({ animation: "slide-down", theme: "fancy" });
     </script>
     <script type="module" src="./docs.js"></script>
@@ -32,7 +32,7 @@
   <body>
     <div id="app" class="page">
       <docs>
-        <p>In this example, we are using the <code>core</code> to just load the JS. Also, we are loading the base css and then overriding our own css.</p>
+        <p>This example demonstrates how you can treat the JS and the CSS separately.</p>
       </docs>
     </div>
   </body>
