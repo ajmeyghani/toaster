@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="../themes/theme-default.min.css">
     <script src="./vue.min.js"></script>
     <script type="module">
-      import toaster from "../core.min.js";
-      window.toaster = toaster;
+      import { useToaster } from "../toaster.min.js";
+      window.toaster = useToaster();
     </script>
     <script type="module" src="./docs.js"></script>
     <title>Vanilla Toaster</title>
@@ -16,7 +16,6 @@
   <body>
     <div id="app" class="page">
       <docs>
-        <pre>You can use this example on how to load the Toaster with CSS and JS separate.</pre>
       </docs>
     </div>
   </body>
