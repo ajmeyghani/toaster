@@ -10,11 +10,12 @@
     "css-dark": "cleancss -o themes/theme-dark.min.css src/dark.css src/base.css",
     "css-default": "cleancss -o themes/theme-default.min.css src/default.css src/base.css",
     "css": "rm -rf themes && mkdir themes && yarn css-base && yarn css-dark && yarn css-default",
-    "js": "NODE_ENV=production rollup --config rollup.config.js && cp esm/{index*,toaster*} .",
+    "js": "NODE_ENV=production rollup --config rollup.config.js && cp esm/{index*,toaster*,themes*} .",
     "prebuild": "yarn clean",
     "build": "yarn css && yarn js",
     "gh": "gh-pages --dist ./ --src '{src/**,themes/**,gh-pages/**}'",
-    "prep": "yarn build && yarn gh"
+    "prep": "yarn build && yarn gh",
+    "gzip": "gzip -k esm/* && gzip -k umd/* && gzip -k themes"
   },
   "repository": {
     "type": "git",
@@ -23,8 +24,10 @@
   "files": [
     "/index.js",
     "/index.min.js",
-    "/core.js",
-    "/core.min.js",
+    "/toaster.js",
+    "/toaster.min.js",
+    "/themes.js",
+    "/themes.min.js",
     "/themes",
     "/umd",
     "/LICENSE",

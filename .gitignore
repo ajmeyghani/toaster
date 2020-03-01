@@ -9,6 +9,7 @@
 gh-pages/src
 gh-pages/themes
 /themes/*.gz
+/themes*
 
 # Logs
 logs

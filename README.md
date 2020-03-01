@@ -10,7 +10,7 @@ Simple toaster in vanilla JavaScript for modern browsers.
 
 ## Why
 
-I was looking for a very simple toaster, but I couldn't find one. Most of the toasters out there pack a lot of features that I didn't need. This toaster is very simple, it only shows one toast at a time. Also, it's very lightweight (< 2kb gzipped), has zero dependencies, and is written for modern browsers. The CSS is also very well organized, you can easily override it or use it to create new themes and animations with no hassle.
+I was looking for a very simple toaster, but I couldn't find one. Most of the toasters out there pack a lot of features that I didn't need. This toaster is very simple, it only shows one toast at a time. Also, it's very lightweight (< 2.3kb gzipped), has zero dependencies, and is written for modern browsers. The CSS is also very well organized, you can easily override it or use it to create new themes and animations with no hassle.
 
 ## Browser Support
 
@@ -33,8 +33,8 @@ Using the default export above the CSS & JS are loaded automatically. This is th
 **JS**
 
 ```js
-import newToaster from "@ajmey/toaster/esm/core.js";
-const toaster = newToaster({animation: "slide-down"});
+import { useToaster } from "@ajmey/toaster/toaster";
+const toaster = useToaster({animation: "slide-down"});
 ```
 
 For more details on available module formats and initialization methods, check out the [module formats](#modules) section.
@@ -85,22 +85,23 @@ toaster.clear().then(count => console.log("cleared toasters: ", count));
 
 There are two ways that you can initialize a toaster object:
 
-1. Using the initialization function `useToaster(options: object)`:
+1. Using the initialization function `useToaster(options?: object, injectCss?: function)`:
 
-    `useToaster` gives you more control over the initialization. It takes an `options` object in the following form:
+    `useToaster` gives you more control over the initialization. Note that when this function is used, no CSS will be injected to the page, even if `injectCss` option is set to true. Below are the arguments details:
 
     - `options.theme`: `string`, theme name, eg `default`, `dark`, etc. If no value is given `default` is used.
     - `options.injectCss`: `boolean`, if set to true, the specified theme is automatically injected to the page in a `style` tag and you won't have to include any css files. Default to `true`
     - `options.animation`: `string`, defining the name of the animation. Defaults to `appear`. Available values are `appear` and `slide-down`.
 
-    Example:
+    The `injectCss` function can be passed in to inject custom css to the page, used for injecting themes. Please see `gh-pages/index.dev3.html` for usage example.
+
+    Basic example:
 
     ```js
-    import { useToaster } from "@ajmey/toaster/esm/use-toaster";
-    const toaster = useToaster({ theme: "dark", injectCss: true, animation: "slide-down" });
+    import { useToaster } from "@ajmey/toaster/toaster";
+    const toaster = useToaster({ theme: "dark", animation: "slide-down" });
     toaster.success("hello world!");
     ```
-
 
 2. Using the default export:
 
@@ -115,13 +116,13 @@ There are two ways that you can initialize a toaster object:
     toaster.success("Hello!");
     ```
 
-### `esm/core.js`
+### `toaster.js`
 
-This file only includes the JavaScript and it exports a single function `newToaster` that has the same signature as `useToaster`. Except that it doesn't recognize the `injectCss` option.
+This file only includes the JavaScript and it exports two functions `useToaster`, `injectStyles`:
 
 ```js
-import newToaster from "@ajmey/toaster/esm/core";
-const toaster = newToaster({theme: "dark", animation: "slide-down"});
+import {useToaster} from "@ajmey/toaster/toaster/toaster";
+const toaster = useToaster({theme: "dark", animation: "slide-down"});
 ```
 
 If you load the module using this method, you need to make sure to include a theme file:
@@ -177,8 +178,8 @@ By default, toaster uses the `appear` animation. You can create new animations u
 In the example above, we create a new animation called `slide-down`. Once the CSS is defined, you can pass `animation` as an option to `useToaster`:
 
 ```js
-import newToaster from "@ajmey/toaster/esm/core";
-const toaster = newToaster({ animation: "slide-down" });
+import {useToaster} from "@ajmey/toaster/toaster/toaster";
+const toaster = useToaster({ animation: "slide-down" });
 ```
 
 ## Overriding CSS
@@ -210,8 +211,8 @@ This package is available both in ES and UMD format:
 
 ```js
 import toaster from "@ajmey/toaster";
-import newToaster from "@ajmey/toaster/esm/core";
-import {useToaster} from "@ajmey/toaster/esm/use-toaster";
+import {useToaster} from "@ajmey/toaster/toaster";
+import {injectStyles} from "@ajmey/toaster/toaster";
 ```
 
 **UDM**
@@ -226,20 +227,26 @@ All the UMD formats are available in the `node_modules/@ajmey/toaster/umd`. When
 </script>
 ```
 
-
 ## Bundle Size
-
-### Minified
-
-- CSS: `themes/theme-default.min.css`: 2.5 kb
-- JS: `esm/core.min.js`: 2.4 kb
-- total: 2.5 kb + 2.4 kb = 4.9 kb
 
 ### minified + gzipped
 
-- CSS: `themes/theme-default.min.css.gz`: 827 bytes
-- JS: `esm/core.min.js.gz`: 1.1 kb
-- total: 1.1 kb + 827 b = 1.927 kb Gzipped
+With an ideal setup, that is `esm/toaster.min.js.gz` and `themes/theme-default.min.css.gz`, the total size will be: 1.4K + 811B = 2.211 kb
+
+#### esm:
+2.3K esm/index.min.js.gz
+1.4K esm/toaster.min.js.gz
+990B esm/themes.min.js.gz
+
+#### umd:
+3.0K umd/index.min.js.gz
+2.2K umd/toaster.min.js.gz
+1.1K umd/themes.min.js.gz
+
+#### themes:
+815B themes/theme-dark.min.css.gz
+811B themes/theme-default.min.css.gz
+728B themes/base.min.css.gz
 
 ## Development
 
