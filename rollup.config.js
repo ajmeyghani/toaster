@@ -89,6 +89,6 @@ const modules = [
 ];
 
 const buildEsModules = modules.map(makeBuildConfig("esm"));
-const buildUmdModules = modules.map(makeBuildConfig("umd"));
+const buildUmdModules = ["index", "index.min"].map(makeBuildConfig("umd"));
 
 export default buildEsModules.concat(buildUmdModules);

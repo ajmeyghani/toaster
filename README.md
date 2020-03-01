@@ -211,8 +211,7 @@ This package is available both in ES and UMD format:
 
 ```js
 import toaster from "@ajmey/toaster";
-import {useToaster} from "@ajmey/toaster/toaster";
-import {injectStyles} from "@ajmey/toaster/toaster";
+import {useToaster, injectStyles} from "@ajmey/toaster/toaster";
 ```
 
 **UDM**
@@ -223,7 +222,9 @@ All the UMD formats are available in the `node_modules/@ajmey/toaster/umd`. When
 <script src="node_modules/@ajmey/toaster/umd/index.js"></script>
 <script>
   window.toaster = window.ajmtoaster.default;
-  toaster.success("hello.");
+  window.toaster2 = window.ajmtoaster.useToaster({ animation: "slide-down", theme: "dark"})
+  window.toaster2.failure("Something went wrong.");
+  console.log(window.ajmtoaster.themes.baseCss.length);
 </script>
 ```
 
@@ -231,7 +232,7 @@ All the UMD formats are available in the `node_modules/@ajmey/toaster/umd`. When
 
 ### minified + gzipped
 
-With an ideal setup, that is `esm/toaster.min.js.gz` and `themes/theme-default.min.css.gz`, the total size will be: 1.4K + 811B = 2.211 kb
+If using JS/CSS separately, that is `esm/toaster.min.js.gz` and `themes/theme-default.min.css.gz`, the total size will be: 1.4K + 811B = **2.211 kb**. Below is a full list of all min.gz file sizes:
 
 #### esm:
 2.3K esm/index.min.js.gz
@@ -278,11 +279,12 @@ With an ideal setup, that is `esm/toaster.min.js.gz` and `themes/theme-default.m
 - [x] Add gh pages
 - [x] Add different types of animation?
 - [x] Add build task to bundle up and minify js, webpack?
+- [x] For umd build, transpile -> es5
+- [x] Make doc page for each way the module can be loaded/imported.
+- [x] Setup TestCafe, add some e2e tests.
+- [ ] Add more e2e tests.
+- [ ] Add unit tests.
 - [ ] Allow animation type in doc page.
-- [ ] Make doc page for each way the module can be loaded/imported.
-- [ ] For umd build, transpile -> es5
+- [ ] Figure out how to deal with umd if multiple index and toaster are loaded.
 - [ ] Add events
 - [ ] Make it easier to maintain CSS styles in css or js implementations.
-- [ ] Testem browser testing: testem, test cafe ?
-
-
