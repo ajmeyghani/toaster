@@ -282,9 +282,9 @@ If using JS/CSS separately, that is `esm/toaster.min.js.gz` and `themes/theme-de
 - [x] For umd build, transpile -> es5
 - [x] Make doc page for each way the module can be loaded/imported.
 - [x] Setup TestCafe, add some e2e tests.
+- [x] Figure out how to deal with umd if multiple index and toaster are loaded.
 - [ ] Add more e2e tests.
 - [ ] Add unit tests.
 - [ ] Allow animation type in doc page.
-- [ ] Figure out how to deal with umd if multiple index and toaster are loaded.
 - [ ] Add events
 - [ ] Make it easier to maintain CSS styles in css or js implementations.
