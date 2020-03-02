@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./bulma-0.8.0/css/bulma.min.css" />
+    <link rel="stylesheet" href="./docs.css" />
+    <script src="./vue.min.js"></script>
+    <script type="module">
+      import { useToaster, injectStyles } from "../src/toaster.js";
+      import { baseCss } from "../src/themes.js";
+
+      let fancyDef = `
+      .ajmtoaster,
+      .ajmtoaster.theme-default,
+      .ajmtoaster.theme-fancy {
+        --ajmt-white:    white;
+        --ajmt-success:  green;
+        --ajmt-failure:  red;
+        --ajmt-warning:  yellow;
+        --ajmt-info:     blue;
+        --ajmt-duration: 300ms;
+        --ajmt-easing:   ease-in-out;
+      }
+      `;
+
+      let myThemes = {
+        fancy: fancyDef + baseCss
+      };
+
+      window.toaster = useToaster(
+        {
+          animation: "slide-down",
+          theme: "fancy",
+          injectCss: true,
+        },
+        injectStyles(myThemes)
+      );
+    </script>
+    <script type="module" src="./docs.js"></script>
+    <title>dev3</title>
+  </head>
+  <body>
+    <div id="app" class="page">
+      <docs>
+        <p>
+          Details: create a toaster with <code>useToaster</code>, inject css
+          using custom theme in JS.
+        </p>
+      </docs>
+    </div>
+  </body>
+</html>

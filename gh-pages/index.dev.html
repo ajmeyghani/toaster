@@ -4,18 +4,18 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="./bulma-0.8.0/css/bulma.min.css" />
     <link rel="stylesheet" href="./docs.css" />
-    <link rel="stylesheet" href="../themes/theme-default.min.css">
     <script src="./vue.min.js"></script>
     <script type="module">
-      import { useToaster } from "../toaster.min.js";
-      window.toaster = useToaster();
+      import toaster from "../src/index.js";
+      window.toaster = toaster;
     </script>
     <script type="module" src="./docs.js"></script>
-    <title>Vanilla Toaster</title>
+    <title>dev1</title>
   </head>
   <body>
     <div id="app" class="page">
       <docs>
+        <p>Details: import using all defaults from index.js, CSS is injected.</p>
       </docs>
     </div>
   </body>

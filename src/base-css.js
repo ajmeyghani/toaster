@@ -79,10 +79,7 @@ const baseStyles = `
   background: var(--ajmt-info);
 }
 
-.ajmtoaster__inner.--success,
-.ajmtoaster__inner.--failure,
-.ajmtoaster__inner.--warning,
-.ajmtoaster__inner.--info {
+.ajmtoaster__inner {
   color: var(--ajmt-white);
 }
 
@@ -105,7 +102,7 @@ const baseStyles = `
 .ajmtoaster__message {
   max-width: 100%;
   max-height: 100px;
-  overflow: scroll;
+  overflow: auto;
   margin-top: 0;
 
   font-size: 80%;

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./bulma-0.8.0/css/bulma.min.css" />
+    <link rel="stylesheet" href="./docs.css" />
+    <!-- <link rel="stylesheet" href="../themes/theme-default.min.css"> -->
+    <script src="../umd/index.js"></script>
+    <script src="./vue.min.js"></script>
+    <script>
+      window.toaster = window.ajmtoaster.default;
+      window.toaster2 = window.ajmtoaster.useToaster({ animation: "slide-down", theme: "dark"})
+      window.toaster2.failure("Something went wrong.");
+      console.log(window.ajmtoaster.themes.baseCss.length);
+    </script>
+    <script type="module" src="./docs.js"></script>
+    <title>umd</title>
+  </head>
+  <body>
+    <div id="app" class="page">
+      <docs></docs>
+    </div>
+  </body>
+</html>

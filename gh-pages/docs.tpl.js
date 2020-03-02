@@ -3,31 +3,49 @@ const template = `
   <h1 class="subtitle is-2">🍞 Vanilla Toaster</h1>
   <h2 class="subtitle is-4">Make a Toast</h2>
 
+  <slot></slot>
+
   <section>
     <button
-      v-on:click="toaster.success(message, {dismiss, title})"
+      id="test-success-button"
+      v-on:click="toaster.success(message, {dismiss, title, animation})"
       class="button is-success"
     >
       Success
     </button>
     <button
-      v-on:click="toaster.failure(message, {dismiss, title})"
+      id="test-failure-button"
+      v-on:click="toaster.failure(message, {dismiss, title, animation})"
       class="button is-danger"
     >
       Failure
     </button>
     <button
-      v-on:click="toaster.info(message, {dismiss, title})"
+      id="test-info-button"
+      v-on:click="toaster.info(message, {dismiss, title, animation})"
       class="button is-info"
     >
       Info
     </button>
     <button
-      v-on:click="toaster.warning(message, {dismiss, title})"
+      id="test-warning-button"
+      v-on:click="toaster.warning(message, {dismiss, title, animation})"
       class="button is-warning"
     >
       Warning
     </button>
+  </section>
+
+  <section class="hspaced">
+    <h4>Animation:</h4>
+    <div>
+      <input type="radio" id="slidedown" value="slide-down" v-model="animation">
+      <label for="slidedown"><code>slide-down</code></label>
+    </div>
+    <div>
+      <input type="radio" id="appear" value="appear" v-model="animation">
+      <label for="appear"><code>appear</code></label>
+    </div>
   </section>
 
   <section class="hspaced">
@@ -59,7 +77,7 @@ const template = `
   </section>
 
   <section class="sections">
-    <button v-on:click="toaster.clear()" class="button is-outlined">Clear Toaster</button>
+    <button v-on:click="toaster.clear().then(r => console.log(r))" class="button is-outlined">Clear Toaster</button>
     <pre>toaster.clear()</pre>
   </section>
 </div>
