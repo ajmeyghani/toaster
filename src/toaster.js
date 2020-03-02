@@ -20,12 +20,11 @@ Toaster.titles = {
 };
 
 function Toaster(o = {}, injectFn) {
-  if (!isFunction(injectFn) || !injectFn.ajmStyleInjector) {
+  if (injectFn && (!isFunction(injectFn) || !injectFn.ajmStyleInjector)) {
     throw new Error("Provided css injector function is not valid.");
   }
 
   const defaults = {
-    injectCss: false,
     theme: "default",
     animation: "appear",
   };
@@ -33,7 +32,7 @@ function Toaster(o = {}, injectFn) {
   this.config = { ...defaults, ...o };
   this.config.injectFn = injectFn;
 
-  if (this.config.injectCss) {
+  if (this.config.injectFn) {
     removeInjectedStyles();
     injectFn(this.config.theme);
   }
@@ -43,7 +42,7 @@ const useToaster = (o, injectFn) => new Toaster(o, injectFn);
 
 const callToast = (type, message, config, o) => {
    removeInjectedStyles();
-   if (config.injectCss) {
+   if (config.injectFn) {
     config.injectFn(config.theme);
    }
 

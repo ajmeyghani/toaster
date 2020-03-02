@@ -1,7 +1,8 @@
 import themes from "./themes.js";
 import { useToaster, injectStyles } from "./toaster.js";
-export default useToaster({ injectCss: true }, injectStyles(themes));
-export {
-  useToaster,
-  themes,
-}
+const toaster = useToaster(
+  { animation: "slide-down", theme: "default" },
+  injectStyles(themes)
+);
+export default toaster;
+export { useToaster, themes };

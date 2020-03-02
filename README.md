@@ -24,21 +24,29 @@ Latest and the greatest.
 
 Using the default export above the CSS & JS are loaded automatically. This is the fastest way to get started, but the final bundle is a little larger. Ideally, you should load the CSS and the JS separately:
 
-**HTML**
+**Load CSS**
 
 ```html
 <link rel="stylesheet" href="node_modules/@ajmey/toaster/themes/theme-default.min.css">
 ```
 
+or if you are using a bundler like Webpack:
+
+```js
+import "@ajmey/toaster/themes/theme-default.min.css";
+```
+
+Then, use in JS:
+
 **JS**
 
 ```js
 import { useToaster } from "@ajmey/toaster/toaster";
+/* factory function `useToaster` does not inject CSS */
 const toaster = useToaster({animation: "slide-down", theme: "default"});
+toaster.success();
 ```
 Please check out the [module formats](#modules) and [initialization](#initialization) sections for more details.
-
-
 
 ## API
 
@@ -53,12 +61,12 @@ The `toaster` object has the following methods for invoking a toast:
 
 The above methods all have the following signature:
 
-`[toastType](message: string, options: object): Promise<DOM Node>`
+`[toastType](message?: string, options?: object) -> Promise<DOM Node>`
 
 - `message`: `string` the message to show
 - `options`: `object` plain object defining the options
     - `options.dismiss`: `number` auto dismiss a toast after `dismiss` milliseconds. If the value is falsy, auto-dismiss is disabled. Success toasts are automatically dismissed after `1500` ms. Other types of toasts are not dismissed automatically.
-    - `options.title`: `string` title to be used for the toast. Default titles are: Success, Oops, Info, and Warning.
+    - `options.title`: `string` title to be used for the toast.
     - `options.theme`: `string` you can override the theme used in initialization
     - `options.animation`: `string` you can also override the animation used initially
 
@@ -88,15 +96,14 @@ toaster.clear().then(count => console.log("cleared toasters: ", count));
 
 There are two ways that you can initialize a toaster object:
 
-1. Using the factory function `useToaster`, available in `@ajmey/toaster/toaster`: `useToaster(options?: object, injectCss?: function)`
+1. Using the factory function `useToaster`, available in `@ajmey/toaster/toaster`: `useToaster(options?: object, injectStyles?: function)`
 
-    `useToaster` gives you more control over the initialization. Note that when this function is used, no CSS will be injected to the page, even if `injectCss` option is set to true. Below are the arguments details:
+    `useToaster` gives you more control over the initialization. Note that when this function is used, **no CSS will be injected to the page**. Below are the arguments details:
 
     - `options.theme`: `string`, theme name, eg `default`, `dark`, etc. If no value is given `default` is used.
-    - `options.injectCss`: `boolean`, if set to true, the specified theme is automatically injected to the page in a `style` tag and you won't have to include any css files. Default to `true`
     - `options.animation`: `string`, defining the name of the animation. Defaults to `appear`. Available values are `appear` and `slide-down`.
 
-    The `injectCss` function can be passed in to inject custom css to the page, used for injecting themes. Please see `gh-pages/index.dev3.html` for usage example.
+    The `injectStyles` function can be passed in order to inject custom css to the page. Please see `gh-pages/index.dev3.html` for usage example.
 
     Basic example:
 
@@ -118,21 +125,6 @@ There are two ways that you can initialize a toaster object:
     import toaster from "@ajmey/toaster";
     toaster.success("Hello!");
     ```
-
-### `toaster.js`
-
-This file only includes the JavaScript and it exports two functions `useToaster`, `injectStyles`:
-
-```js
-import {useToaster} from "@ajmey/toaster/toaster";
-const toaster = useToaster({theme: "dark", animation: "slide-down"});
-```
-
-If you create a toaster using this function, no css is injected to the page, so make sure to include a theme file:
-
-```html
-<link rel="stylesheet" href="node_modules/@ajmey/toaster/themes/theme-default.min.css">
-```
 
 ## Themes
 
@@ -181,7 +173,7 @@ By default, toaster uses the `appear` animation. You can create new animations u
 In the example above, we create a new animation called `slide-down`. Once the CSS is defined, you can pass `animation` as an option to `useToaster`:
 
 ```js
-import {useToaster} from "@ajmey/toaster/toaster/toaster";
+import { useToaster } from "@ajmey/toaster/toaster/toaster";
 const toaster = useToaster({ animation: "slide-down" });
 ```
 
@@ -216,6 +208,15 @@ This package is available both in ES and UMD formats:
 import toaster from "@ajmey/toaster"; // default import
 import {useToaster, injectStyles} from "@ajmey/toaster/toaster";
 ```
+
+All the ESM modules are importable from the root `@ajmey/toaster/<module>`:
+
+- index.js
+- index.min.js
+- toaster.js
+- toaster.min.js
+- themes.js
+- themes.min.js
 
 **UDM**
 
