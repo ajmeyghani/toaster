@@ -2,7 +2,7 @@
 
 Simple toaster in vanilla JavaScript for modern browsers.
 
->##Work in progress, do not use in production. The API is not stable.##
+**Work in progress, do not use in production. The API is not stable.**
 
 ## DEMO
 
@@ -34,10 +34,11 @@ Using the default export above the CSS & JS are loaded automatically. This is th
 
 ```js
 import { useToaster } from "@ajmey/toaster/toaster";
-const toaster = useToaster({animation: "slide-down"});
+const toaster = useToaster({animation: "slide-down", theme: "default"});
 ```
+Please check out the [module formats](#modules) and [initialization](#initialization) sections for more details.
 
-For more details on available module formats and initialization methods, check out the [module formats](#modules) section.
+
 
 ## API
 
@@ -58,13 +59,15 @@ The above methods all have the following signature:
 - `options`: `object` plain object defining the options
     - `options.dismiss`: `number` auto dismiss a toast after `dismiss` milliseconds. If the value is falsy, auto-dismiss is disabled. Success toasts are automatically dismissed after `1500` ms. Other types of toasts are not dismissed automatically.
     - `options.title`: `string` title to be used for the toast. Default titles are: Success, Oops, Info, and Warning.
+    - `options.theme`: `string` you can override the theme used in initialization
+    - `options.animation`: `string` you can also override the animation used initially
 
 **Return Value**: Each method will return a `promise` that resolves to the wrapper DOM element holding the toaster. The wrapper node is useful if you use set `dismiss` to `false` because you will have access to the wrapper node at that point.
 
 **Examples:**
 
 ```js
-toaster.failure("This is the message body". { title: "Error!", dismiss: false});
+toaster.failure("This is the message body". { title: "Error!", dismiss: false, animation: "slide-down", theme: "dark"});
 toaster.success("Todo item was created!");
 toaster.info();
 toaster.failure("Something went wrong", { dismiss: false})
@@ -85,7 +88,7 @@ toaster.clear().then(count => console.log("cleared toasters: ", count));
 
 There are two ways that you can initialize a toaster object:
 
-1. Using the initialization function `useToaster(options?: object, injectCss?: function)`:
+1. Using the factory function `useToaster`, available in `@ajmey/toaster/toaster`: `useToaster(options?: object, injectCss?: function)`
 
     `useToaster` gives you more control over the initialization. Note that when this function is used, no CSS will be injected to the page, even if `injectCss` option is set to true. Below are the arguments details:
 
@@ -103,9 +106,9 @@ There are two ways that you can initialize a toaster object:
     toaster.success("hello world!");
     ```
 
-2. Using the default export:
+2. Using the default import
 
-    The default export is a `toaster` object with all default values. If you use this method, the CSS is also automatically injected to the page.
+    The default export on `@ajmey/toaster` is a `toaster` object with all default values. If you use this method, the CSS is also automatically injected to the page and nothing can be customized:
 
     Example:
 
@@ -121,11 +124,11 @@ There are two ways that you can initialize a toaster object:
 This file only includes the JavaScript and it exports two functions `useToaster`, `injectStyles`:
 
 ```js
-import {useToaster} from "@ajmey/toaster/toaster/toaster";
+import {useToaster} from "@ajmey/toaster/toaster";
 const toaster = useToaster({theme: "dark", animation: "slide-down"});
 ```
 
-If you load the module using this method, you need to make sure to include a theme file:
+If you create a toaster using this function, no css is injected to the page, so make sure to include a theme file:
 
 ```html
 <link rel="stylesheet" href="node_modules/@ajmey/toaster/themes/theme-default.min.css">
@@ -205,12 +208,12 @@ Every single class above have a theme modifier as well, in the form of `.[classn
 
 ## Modules
 
-This package is available both in ES and UMD format:
+This package is available both in ES and UMD formats:
 
 **ESM**
 
 ```js
-import toaster from "@ajmey/toaster";
+import toaster from "@ajmey/toaster"; // default import
 import {useToaster, injectStyles} from "@ajmey/toaster/toaster";
 ```
 
@@ -221,10 +224,10 @@ All the UMD formats are available in the `node_modules/@ajmey/toaster/umd`. When
 ```html
 <script src="node_modules/@ajmey/toaster/umd/index.js"></script>
 <script>
+  console.log(window.ajmtoaster.themes.baseCss.length);
   window.toaster = window.ajmtoaster.default;
   window.toaster2 = window.ajmtoaster.useToaster({ animation: "slide-down", theme: "dark"})
   window.toaster2.failure("Something went wrong.");
-  console.log(window.ajmtoaster.themes.baseCss.length);
 </script>
 ```
 
@@ -232,11 +235,11 @@ All the UMD formats are available in the `node_modules/@ajmey/toaster/umd`. When
 
 ### minified + gzipped
 
-If using JS/CSS separately, that is `esm/toaster.min.js.gz` and `themes/theme-default.min.css.gz`, the total size will be: 1.4K + 811B = **2.211 kb**. Below is a full list of all min.gz file sizes:
+If using JS/CSS separately, the smallest total size will be: **1.4K + 811B = 2.211 kb**. Below is a full list of all min.gz file sizes:
 
 #### esm:
 2.3K esm/index.min.js.gz
-1.4K esm/toaster.min.js.gz
+**1.4K esm/toaster.min.js.gz**
 990B esm/themes.min.js.gz
 
 #### umd:
@@ -246,7 +249,7 @@ If using JS/CSS separately, that is `esm/toaster.min.js.gz` and `themes/theme-de
 
 #### themes:
 815B themes/theme-dark.min.css.gz
-811B themes/theme-default.min.css.gz
+**811B themes/theme-default.min.css.gz**
 728B themes/base.min.css.gz
 
 ## Development
@@ -283,8 +286,8 @@ If using JS/CSS separately, that is `esm/toaster.min.js.gz` and `themes/theme-de
 - [x] Make doc page for each way the module can be loaded/imported.
 - [x] Setup TestCafe, add some e2e tests.
 - [x] Figure out how to deal with umd if multiple index and toaster are loaded.
+- [x] Allow animation type in doc page.
 - [ ] Add more e2e tests.
 - [ ] Add unit tests.
-- [ ] Allow animation type in doc page.
 - [ ] Add events
 - [ ] Make it easier to maintain CSS styles in css or js implementations.

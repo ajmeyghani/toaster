@@ -15,12 +15,12 @@ Object.assign(Toaster, {
 Toaster.titles = {
   [Toaster.SUCCESS]: "Success!",
   [Toaster.FAILURE]: "Oops...",
-  [Toaster.INFO]: "Info!",
-  [Toaster.WARNING]: "Warning..."
+  [Toaster.INFO]: "Note!",
+  [Toaster.WARNING]: "Warning!"
 };
 
 function Toaster(o = {}, injectFn) {
-  if (isFunction(injectFn) && !injectFn.ajmStyleInjector) {
+  if (!isFunction(injectFn) || !injectFn.ajmStyleInjector) {
     throw new Error("Provided css injector function is not valid.");
   }
 
@@ -42,14 +42,6 @@ function Toaster(o = {}, injectFn) {
 const useToaster = (o, injectFn) => new Toaster(o, injectFn);
 
 const callToast = (type, message, config, o) => {
-  /*
-  * TODO: It's ok, but find a better solution to handle this.
-  * Calling removeStyles here in case the user
-  * is using multiple instances of a toaster using
-  * different initialization methods.
-  * Also it would be nice to have an event to call this
-  * right before the toast is going to appear on the page.
-  */
    removeInjectedStyles();
    if (config.injectCss) {
     config.injectFn(config.theme);
@@ -70,10 +62,11 @@ const callToast = (type, message, config, o) => {
 
   return toast({
     ...config,
+    ...o,
     type,
     title,
     message,
-    dismiss
+    dismiss,
   });
 };
 
