@@ -1,5 +1,4 @@
 import docsTemplate from "./docs.tpl.js";
-
 Vue.component("docs", {
   data: function() {
     return {
