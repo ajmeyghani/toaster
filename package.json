@@ -15,8 +15,8 @@
     "js": "NODE_ENV=production rollup --config rollup.config.js && cp esm/{index*,toaster*,themes*} .",
     "prebuild": "yarn clean",
     "build": "yarn css && yarn js",
-    "gh": "gh-pages --dist ./ --src '{src/**,themes/**,gh-pages/**}'",
-    "prep": "yarn build && yarn gh",
+    "gh": "gh-pages --dist ./ --src '{src/**,themes/**,gh-pages/**,./*.js}'",
+    "website": "yarn build && yarn gh",
     "gzip": "gzip -k esm/* && gzip -k umd/* && gzip -k themes",
     "server": "http-server -p 8080",
     "serverd": "http-server -p 8081 -c-1"

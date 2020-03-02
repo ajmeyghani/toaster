@@ -268,8 +268,13 @@ If using JS/CSS separately, the smallest total size will be: **1.4K + 811B = 2.2
 
 ## Maintainer
 
-- To update `gh-pages` run `yarn gh`.
-- Run `yarn build && yarn prep && npm version patch|minor|major && npm publish --access=public` to publish the latest version.
+- To update the website run `yarn website`.
+
+To publish a new version:
+
+- `yarn build && yarn website` and git add and commit all.
+- npm version patch|minor|major && npm publish --access=public
+
 
 ## TODO
 
