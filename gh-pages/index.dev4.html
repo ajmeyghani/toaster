@@ -4,26 +4,42 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="./bulma-0.8.0/css/bulma.min.css" />
     <link rel="stylesheet" href="./docs.css" />
-    <link rel="stylesheet" href="../themes/base.min.css">
+    <link rel="stylesheet" href="../themes/base.css">
     <style>
-      .ajmtoaster.theme-fancy,
-      .ajmtoaster.theme-default {
+      .ajmtoaster.theme-fancy {
         --ajmt-white: #fff;
         --ajmt-success: green;
         --ajmt-failure: red;
         --ajmt-warning: yellow;
         --ajmt-info: blue;
         /* transition properties */
-        --ajmt-duration: 400ms;
+        --ajmt-duration: 350ms;
         --ajmt-easing: ease-in-out;
       }
+
       .ajmtoaster__inner.theme-fancy.--warning {
         color: orange;
       }
+
+      /* Define new animation */
+      .ajmtoaster.--animation-slide-down,
+      .ajmtoaster.--animation-slide-down.--active {
+          transition: transform var(--ajmt-duration) var(--ajmt-easing) 0ms,
+          opacity var(--ajmt-duration) var(--ajmt-easing) 50ms;
+      }
+      .ajmtoaster.--animation-slide-down {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      .ajmtoaster.--animation-slide-down.--active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
     </style>
     <script src="./vue.min.js"></script>
     <script type="module">
-      import { useToaster } from "../src/toaster.js";
+      import { useToaster } from "../esm/toaster.js";
       window.toaster = useToaster({ animation: "slide-down", theme: "fancy" });
     </script>
     <script type="module" src="./docs.js"></script>

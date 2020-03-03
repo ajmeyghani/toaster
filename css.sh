@@ -1,5 +1,4 @@
 #!/bin/bash
-
 function clean() {
   rm -rf themes;
 }
@@ -16,8 +15,9 @@ function prethemes() {
 function themes() {
   prethemes;
   cp src/base.css themes/
-  cat src/dark.css src/base.css >> themes/theme-dark.css;
-  cat src/default.css src/base.css >> themes/theme-default.css;
+  cp src/animations.css themes/
+  cat src/dark.css src/animations.css src/base.css >> themes/theme-dark.css;
+  cat src/default.css src/animations.css src/base.css >> themes/theme-default.css;
 }
 
 function cssmin() {
@@ -26,6 +26,5 @@ function cssmin() {
   npx cleancss -o themes/theme-dark.min.css themes/theme-dark.css;
   npx cleancss -o themes/theme-default.min.css themes/theme-default.css;
 }
-
 
 $1

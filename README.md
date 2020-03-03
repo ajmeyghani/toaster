@@ -7,7 +7,7 @@ Simple toaster in vanilla JavaScript for modern browsers.
 ## Why
 
 - 🦄 Very Simple
-- ⚡ Light-weight, < 2kb gzipped CSS + JS
+- ⚡ Lightweight, < 2kb gzipped CSS + JS
 - 😎 Modern
 - 📦 Zero Dependencies
 - 🔌 Compatible with all modern UI frameworks and libraries
@@ -49,7 +49,7 @@ Then, use in JS:
 ```js
 import { useToaster } from "@ajmey/toaster/toaster";
 /* factory function `useToaster` does not inject CSS */
-const toaster = useToaster({animation: "slide-down", theme: "default"});
+const toaster = useToaster({animation: "appear", theme: "default"});
 toaster.success();
 ```
 Please check out the [module formats](#modules) and [initialization](#initialization) sections for more details.
@@ -81,7 +81,7 @@ The above methods all have the following signature:
 **Examples:**
 
 ```js
-toaster.failure("This is the message body". { title: "Error!", dismiss: false, animation: "slide-down", theme: "dark"});
+toaster.failure("This is the message body". { title: "Error!", dismiss: false, animation: "appear", theme: "dark"});
 toaster.success("Todo item was created!");
 toaster.info();
 toaster.failure("Something went wrong", { dismiss: false})
@@ -107,7 +107,7 @@ There are two ways that you can initialize a toaster object:
     `useToaster` gives you more control over the initialization. Note that when this function is used, **no CSS will be injected to the page**. Below are the arguments details:
 
     - `options.theme`: `string`, theme name, eg `default`, `dark`, etc. If no value is given `default` is used.
-    - `options.animation`: `string`, defining the name of the animation. Defaults to `appear`. Available values are `appear` and `slide-down`.
+    - `options.animation`: `string`, defining the name of the animation. Defaults to `appear`. Available values are `appear`.
 
     The `injectStyles` function can be passed in order to inject custom css to the page. Please see `gh-pages/index.dev3.html` for usage example.
 
@@ -115,7 +115,7 @@ There are two ways that you can initialize a toaster object:
 
     ```js
     import { useToaster } from "@ajmey/toaster/toaster";
-    const toaster = useToaster({ theme: "dark", animation: "slide-down" });
+    const toaster = useToaster({ theme: "dark", animation: "appear" });
     toaster.success("hello world!");
     ```
 
@@ -233,7 +233,7 @@ All the UMD formats are available in the `node_modules/@ajmey/toaster/umd`. When
 <script>
   console.log(window.ajmtoaster.themes.baseCss.length);
   window.toaster = window.ajmtoaster.default;
-  window.toaster2 = window.ajmtoaster.useToaster({ animation: "slide-down", theme: "dark"})
+  window.toaster2 = window.ajmtoaster.useToaster({ animation: "appear", theme: "dark"})
   window.toaster2.failure("Something went wrong.");
 </script>
 ```
@@ -267,7 +267,7 @@ If using JS/CSS separately, the smallest total size will be: **1.4K + 811B = 2.2
 - Make sure to install the latest LTS version of Node: `nvm install --lts`.
 - Install yarn with `npm i -g yarn`.
 - Install dependencies with `yarn install`.
-- Run `yarn jsd` to start rollup in watch mode.
+- Run `yarn dev` to start rollup and css watch.
 - Update code in the `src/` folder.
 - Run the examples (gh-pages) locally: `yarn serverd`
 - Open `http://localhost:8081/gh-pages/index.dev*.html` to check the functionality.

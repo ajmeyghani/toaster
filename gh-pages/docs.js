@@ -7,16 +7,15 @@ Vue.component("docs", {
       dismiss: "",
       toaster: window.toaster,
       options: "{}",
-      animation: "appear"
     };
   },
   mounted() {
     this.$watch(
-      vm => [vm.title, vm.message, vm.dismiss, vm.animation],
+      vm => [vm.title, vm.message, vm.dismiss],
       val => {
         this.dismiss = Number(this.dismiss);
         this.options = JSON.stringify(
-          { title: val[0], dismiss: val[2], annimation: val[3] },
+          { title: val[0], dismiss: val[2]},
           null,
           2
         );

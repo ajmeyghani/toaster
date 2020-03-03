@@ -1,0 +1,19 @@
+{
+  "folders":
+  [
+    {
+      "path": ".",
+      "binary_file_patterns": [
+        "esm/*",
+        "umd/*",
+        ".git/*",
+        "*.map",
+        "themes/*",
+        "ajmey-toaster/index*",
+        "ajmey-toaster/toaster*",
+        "ajmey-toaster/themes*",
+        "vue*"
+      ]
+    }
+  ]
+}

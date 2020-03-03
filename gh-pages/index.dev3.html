@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="./docs.css" />
     <script src="./vue.min.js"></script>
     <script type="module">
-      import { useToaster, injectStyles } from "../src/toaster.js";
-      import { baseCss } from "../src/themes.js";
+      import { useToaster, injectStyles } from "../esm/toaster.js";
+      import { baseCss, animations } from "../esm/themes.js";
 
       let fancyDef = `
       .ajmtoaster,
@@ -24,14 +24,12 @@
       `;
 
       let myThemes = {
-        fancy: fancyDef + baseCss
+        fancy: fancyDef + animations + baseCss
       };
 
-      window.toaster = useToaster(
-        {
-          animation: "slide-down",
+      window.toaster = useToaster({
+          animation: "appear",
           theme: "fancy",
-          injectCss: true,
         },
         injectStyles(myThemes)
       );
