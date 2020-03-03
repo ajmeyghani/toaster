@@ -1,196 +1,16 @@
-const baseStyles = `
-.ajmtoaster,
-.ajmtoaster__inner,
-.ajmtoaster__title,
-.ajmtoaster__message,
-.ajmtoaster__dismiss {
-  box-sizing: border-box;
-}
+var css = ".ajmtoaster,\n.ajmtoaster__inner,\n.ajmtoaster__title,\n.ajmtoaster__message,\n.ajmtoaster__dismiss {\n  box-sizing: border-box;\n}\n\n.ajmtoaster {\n  position: fixed;\n  width: 325px;\n  top: 10px;\n  right: 10px;\n  z-index: 999999;\n}\n\n.ajmtoaster__inner {\n  min-height: 60px;\n\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n\n  font-size: 16px;\n  font-family: \"Roboto\", sans-serif;\n  font-weight: 100;\n\n  padding: 15px 26px 15px 15px;\n  border-radius: 3px;\n}\n\n.ajmtoaster__inner.--success {\n  background: var(--ajmt-success);\n}\n\n.ajmtoaster__inner.--failure {\n  background: var(--ajmt-failure);\n}\n\n.ajmtoaster__inner.--warning {\n  background: var(--ajmt-warning);\n}\n\n.ajmtoaster__inner.--info {\n  background: var(--ajmt-info);\n}\n\n.ajmtoaster__inner {\n  color: var(--ajmt-white);\n}\n\n.ajmtoaster__title,\n.ajmtoaster__message,\n.ajmtoaster__dismiss {\n  margin: 0;\n  padding: 0;\n}\n\n.ajmtoaster__title {\n  line-height: 1.1;\n  font-weight: 400;\n}\n\n.ajmtoaster__message {\n  line-height: 1.3;\n}\n\n.ajmtoaster__message {\n  max-width: 100%;\n  max-height: 100px;\n  overflow: auto;\n  margin-top: 0;\n\n  font-size: 80%;\n  word-break: break-word;\n}\n\n.ajmtoaster__message.with-message {\n  margin-top: 10px;\n  margin-right: 10px;\n}\n\n.ajmtoaster__dismiss {\n  box-sizing: border-box;\n  border: none;\n  color: rgba(255, 255, 255, 0.81);\n  line-height: 1;\n  margin: 0;\n  height: 100%;\n  display: block;\n  font-weight: 100;\n  border-radius: 0;\n  min-height: 0;\n  padding: 0;\n  font-family: sans-serif;\n  padding: 0 8px;\n  font-size: 16px;\n\n  position: absolute;\n  right: 0;\n  top: 50%;\n  transform: translateY(-50%);\n}\n\n.ajmtoaster__dismiss,\n.ajmtoaster__dismiss:hover {\n  transition: background-color 200ms ease-in-out;\n}\n\n.ajmtoaster__dismiss {\n  background-color: rgba(0, 0, 0, 0.08);\n}\n\n.ajmtoaster__dismiss:hover {\n  cursor: pointer;\n  background-color: rgba(255, 255, 255, 0.07);\n}\n\n.ajmtoaster__dismiss:active {\n  background-color: rgba(0, 0, 0, 0.08);\n}\n\n.ajmtoaster__dismiss:focus {\n  outline: 0;\n}\n";
 
-.ajmtoaster {
-  position: fixed;
-  width: 325px;
-  top: 10px;
-  right: 10px;
-  z-index: 999999;
-}
+var css$1 = "/* Animation 1: appear */\n.ajmtoaster.--animation-appear,\n.ajmtoaster.--animation-appear.--active {\n    transition: transform var(--ajmt-duration) var(--ajmt-easing) 0ms,\n    opacity var(--ajmt-duration) var(--ajmt-easing) 50ms;\n}\n.ajmtoaster.--animation-appear {\n  opacity: 0;\n  transform: scale(1.1);\n}\n.ajmtoaster.--animation-appear.--active {\n  opacity: 1;\n  transform: scale(1);\n}\n";
 
-.ajmtoaster.--animation-appear,
-.ajmtoaster.--animation-appear.--active {
-    transition: transform var(--ajmt-duration) var(--ajmt-easing) 0ms,
-    opacity var(--ajmt-duration) var(--ajmt-easing) 50ms;
-}
-
-.ajmtoaster.--animation-appear {
-  opacity: 0;
-  transform: scale(1.1);
-}
-
-.ajmtoaster.--animation-appear.--active {
-  opacity: 1;
-  transform: scale(1);
-}
-
-
-.ajmtoaster.--animation-slide-down,
-.ajmtoaster.--animation-slide-down.--active {
-    transition: transform var(--ajmt-duration) var(--ajmt-easing) 0ms,
-    opacity var(--ajmt-duration) var(--ajmt-easing) 50ms;
-}
-
-.ajmtoaster.--animation-slide-down {
-  opacity: 0;
-  transform: translateY(-20px);
-}
-
-.ajmtoaster.--animation-slide-down.--active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.ajmtoaster__inner {
-  min-height: 60px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  font-size: 16px;
-  font-family: "Roboto", sans-serif;
-  font-weight: 100;
-
-  padding: 15px 26px 15px 15px;
-  border-radius: 3px;
-}
-
-.ajmtoaster__inner.--success {
-  background: var(--ajmt-success);
-}
-
-.ajmtoaster__inner.--failure {
-  background: var(--ajmt-failure);
-}
-
-.ajmtoaster__inner.--warning {
-  background: var(--ajmt-warning);
-}
-
-.ajmtoaster__inner.--info {
-  background: var(--ajmt-info);
-}
-
-.ajmtoaster__inner {
-  color: var(--ajmt-white);
-}
-
-.ajmtoaster__title,
-.ajmtoaster__message,
-.ajmtoaster__dismiss {
-  margin: 0;
-  padding: 0;
-}
-
-.ajmtoaster__title {
-  line-height: 1.1;
-  font-weight: 400;
-}
-
-.ajmtoaster__message {
-  line-height: 1.3;
-}
-
-.ajmtoaster__message {
-  max-width: 100%;
-  max-height: 100px;
-  overflow: auto;
-  margin-top: 0;
-
-  font-size: 80%;
-  word-break: break-word;
-}
-
-.ajmtoaster__message.with-message {
-  margin-top: 10px;
-  margin-right: 10px;
-}
-
-.ajmtoaster__dismiss {
-  box-sizing: border-box;
-  border: none;
-  color: rgba(255, 255, 255, 0.81);
-  line-height: 1;
-  margin: 0;
-  height: 100%;
-  display: block;
-  font-weight: 100;
-  border-radius: 0;
-  min-height: 0;
-  padding: 0;
-  font-family: sans-serif;
-  padding: 0 8px;
-  font-size: 16px;
-
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.ajmtoaster__dismiss,
-.ajmtoaster__dismiss:hover {
-  transition: background-color 200ms ease-in-out;
-}
-
-.ajmtoaster__dismiss {
-  background-color: rgba(0, 0, 0, 0.08);
-}
-
-.ajmtoaster__dismiss:hover {
-  cursor: pointer;
-  background-color: rgba(255, 255, 255, 0.07);
-}
-
-.ajmtoaster__dismiss:active {
-  background-color: rgba(0, 0, 0, 0.08);
-}
-
-.ajmtoaster__dismiss:focus {
-  outline: 0;
-}
-`;
-
-const themeDefault = `
-.ajmtoaster,
-.ajmtoaster.theme-default {
-  --ajmt-white: #fff;
-  --ajmt-success: #41d888;
-  --ajmt-failure: #f94416;
-  --ajmt-info: #0387d7;
-  --ajmt-warning: #ffbd02;
-  --ajmt-duration: 300ms;
-  --ajmt-easing: ease-in-out;
-}
-`;
-
-const darkTheme = `
-.ajmtoaster,
-.ajmtoaster.theme-default,
-.ajmtoaster.theme-dark {
-  --ajmt-white: #f6f6f6;
-  --ajmt-success: #032503;
-  --ajmt-failure: #6f1010;
-  --ajmt-warning: #795615;
-  --ajmt-info: #191977;
-  --ajmt-duration: 300ms;
-  --ajmt-easing: ease-in-out;
-}
-`;
+var css$2 = ".ajmtoaster,\n.ajmtoaster.theme-default {\n  --ajmt-white: #fff;\n  --ajmt-success: #41d888;\n  --ajmt-failure: #f94416;\n  --ajmt-info: #0387d7;\n  --ajmt-warning: #ffbd02;\n  --ajmt-duration: 300ms;\n  --ajmt-easing: ease-in-out;\n}\n";
 
 const themes = {
-  baseCss: baseStyles,
-  dark: darkTheme + baseStyles,
-  default: themeDefault + baseStyles
+  animations: css$1,
+  baseCss: css,
+  default: css$2 + css
 };
+
+var version = "0.4.0";
 
 const UNDEFINED = void 0;
 
@@ -338,7 +158,7 @@ const removeInjectedStyles = () => {
 };
 
 Toaster.type = Symbol("#toaster");
-Toaster.version = "1.0.0";
+Toaster.version = version;
 
 Object.assign(Toaster, {
   SUCCESS: "success",
@@ -361,7 +181,7 @@ function Toaster(o = {}, injectFn) {
 
   const defaults = {
     theme: "default",
-    animation: "appear",
+    animation: "appear"
   };
 
   this.config = { ...defaults, ...o };
@@ -376,10 +196,10 @@ function Toaster(o = {}, injectFn) {
 const useToaster = (o, injectFn) => new Toaster(o, injectFn);
 
 const callToast = (type, message, config, o) => {
-   removeInjectedStyles();
-   if (config.injectFn) {
+  removeInjectedStyles();
+  if (config.injectFn) {
     config.injectFn(config.theme);
-   }
+  }
 
   if (!isString(message)) {
     message = "";
@@ -400,7 +220,7 @@ const callToast = (type, message, config, o) => {
     type,
     title,
     message,
-    dismiss,
+    dismiss
   });
 };
 
@@ -425,14 +245,16 @@ function clear() {
 }
 
 Object.assign(Toaster.prototype, {
-  _version: Toaster.version,
   [Toaster.type]: Toaster.type,
+  version: Toaster.version,
   success,
   failure,
   info,
   warning,
   clear
 });
+
+Object.freeze(Toaster.prototype);
 
 const toaster = useToaster(
   { animation: "slide-down", theme: "default" },
@@ -441,3 +263,4 @@ const toaster = useToaster(
 
 export default toaster;
 export { themes, useToaster };
+//# sourceMappingURL=index.js.map

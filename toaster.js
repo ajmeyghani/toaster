@@ -1,3 +1,5 @@
+var version = "0.4.0";
+
 const UNDEFINED = void 0;
 
 const isUndefined = v => v === UNDEFINED;
@@ -144,7 +146,7 @@ const removeInjectedStyles = () => {
 };
 
 Toaster.type = Symbol("#toaster");
-Toaster.version = "1.0.0";
+Toaster.version = version;
 
 Object.assign(Toaster, {
   SUCCESS: "success",
@@ -167,7 +169,7 @@ function Toaster(o = {}, injectFn) {
 
   const defaults = {
     theme: "default",
-    animation: "appear",
+    animation: "appear"
   };
 
   this.config = { ...defaults, ...o };
@@ -182,10 +184,10 @@ function Toaster(o = {}, injectFn) {
 const useToaster = (o, injectFn) => new Toaster(o, injectFn);
 
 const callToast = (type, message, config, o) => {
-   removeInjectedStyles();
-   if (config.injectFn) {
+  removeInjectedStyles();
+  if (config.injectFn) {
     config.injectFn(config.theme);
-   }
+  }
 
   if (!isString(message)) {
     message = "";
@@ -206,7 +208,7 @@ const callToast = (type, message, config, o) => {
     type,
     title,
     message,
-    dismiss,
+    dismiss
   });
 };
 
@@ -231,8 +233,8 @@ function clear() {
 }
 
 Object.assign(Toaster.prototype, {
-  _version: Toaster.version,
   [Toaster.type]: Toaster.type,
+  version: Toaster.version,
   success,
   failure,
   info,
@@ -240,5 +242,8 @@ Object.assign(Toaster.prototype, {
   clear
 });
 
+Object.freeze(Toaster.prototype);
+
 export default useToaster;
 export { injectStyles, useToaster };
+//# sourceMappingURL=toaster.js.map

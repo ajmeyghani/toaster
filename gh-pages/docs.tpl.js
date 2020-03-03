@@ -8,44 +8,32 @@ const template = `
   <section>
     <button
       id="test-success-button"
-      v-on:click="toaster.success(message, {dismiss, title, animation})"
+      v-on:click="toaster.success(message, {dismiss, title})"
       class="button is-success"
     >
       Success
     </button>
     <button
       id="test-failure-button"
-      v-on:click="toaster.failure(message, {dismiss, title, animation})"
+      v-on:click="toaster.failure(message, {dismiss, title})"
       class="button is-danger"
     >
       Failure
     </button>
     <button
       id="test-info-button"
-      v-on:click="toaster.info(message, {dismiss, title, animation})"
+      v-on:click="toaster.info(message, {dismiss, title})"
       class="button is-info"
     >
       Info
     </button>
     <button
       id="test-warning-button"
-      v-on:click="toaster.warning(message, {dismiss, title, animation})"
+      v-on:click="toaster.warning(message, {dismiss, title})"
       class="button is-warning"
     >
       Warning
     </button>
-  </section>
-
-  <section class="hspaced">
-    <h4>Animation:</h4>
-    <div>
-      <input type="radio" id="slidedown" value="slide-down" v-model="animation">
-      <label for="slidedown"><code>slide-down</code></label>
-    </div>
-    <div>
-      <input type="radio" id="appear" value="appear" v-model="animation">
-      <label for="appear"><code>appear</code></label>
-    </div>
   </section>
 
   <section class="hspaced">

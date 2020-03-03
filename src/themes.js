@@ -1,12 +1,12 @@
-import baseCss from "./base-css.js";
-import themeDefault from "./theme-default.js";
-import themeDark from "./theme-dark.js";
+import baseCss from "./base.css";
+import animations from "./animations.css";
+import themeDefault from "./default.css";
 
 const themes = {
-  baseCss: baseCss,
-  dark: themeDark + baseCss,
+  animations,
+  baseCss,
   default: themeDefault + baseCss
 };
 
 export default themes;
-export { baseCss, themeDefault, themeDark };
+export { baseCss, animations, themeDefault };

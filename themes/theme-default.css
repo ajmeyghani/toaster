@@ -1,4 +1,28 @@
 .ajmtoaster,
+.ajmtoaster.theme-default {
+  --ajmt-white: #fff;
+  --ajmt-success: #41d888;
+  --ajmt-failure: #f94416;
+  --ajmt-info: #0387d7;
+  --ajmt-warning: #ffbd02;
+  --ajmt-duration: 300ms;
+  --ajmt-easing: ease-in-out;
+}
+/* Animation 1: appear */
+.ajmtoaster.--animation-appear,
+.ajmtoaster.--animation-appear.--active {
+    transition: transform var(--ajmt-duration) var(--ajmt-easing) 0ms,
+    opacity var(--ajmt-duration) var(--ajmt-easing) 50ms;
+}
+.ajmtoaster.--animation-appear {
+  opacity: 0;
+  transform: scale(1.1);
+}
+.ajmtoaster.--animation-appear.--active {
+  opacity: 1;
+  transform: scale(1);
+}
+.ajmtoaster,
 .ajmtoaster__inner,
 .ajmtoaster__title,
 .ajmtoaster__message,
