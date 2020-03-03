@@ -2,15 +2,21 @@
 
 Simple toaster in vanilla JavaScript for modern browsers.
 
-**Work in progress, do not use in production. The API is not stable.**
-
-## DEMO
-
-**Check out the [demo](https://ajmeyghani.github.io/toaster/gh-pages/) page.** You can use it to play around with different kinds of toasts.
+**🚀 Work in progress, do not use in production yet.**
 
 ## Why
 
-I was looking for a very simple toaster, but I couldn't find one. Most of the toasters out there pack a lot of features that I didn't need. This toaster is very simple, it only shows one toast at a time. Also, it's very lightweight (< 2.3kb gzipped), has zero dependencies, and is written for modern browsers. The CSS is also very well organized, you can easily override it or use it to create new themes and animations with no hassle.
+- 🦄 Very Simple
+- ⚡ Light-weight, < 2kb gzipped CSS + JS
+- 😎 Modern
+- 📦 Zero Dependencies
+- 🔌 Compatible with all modern UI frameworks and libraries
+- 🎨 Easily customizable with themes and custom CSS
+
+
+## Demo
+
+**Check out the [demo](https://ajmeyghani.github.io/toaster/gh-pages/) page.** You can use it to play around with different kinds of toasts.
 
 ## Browser Support
 
