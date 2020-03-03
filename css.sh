@@ -16,14 +16,13 @@ function themes() {
   prethemes;
   cp src/base.css themes/
   cp src/animations.css themes/
-  cat src/dark.css src/animations.css src/base.css >> themes/theme-dark.css;
   cat src/default.css src/animations.css src/base.css >> themes/theme-default.css;
 }
 
 function cssmin() {
   themes;
   npx cleancss -o themes/base.min.css themes/base.css;
-  npx cleancss -o themes/theme-dark.min.css themes/theme-dark.css;
+  npx cleancss -o themes/animations.min.css themes/animations.css;
   npx cleancss -o themes/theme-default.min.css themes/theme-default.css;
 }
 

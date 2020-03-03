@@ -6,13 +6,12 @@ Simple toaster in vanilla JavaScript for modern browsers.
 
 ## Why
 
-- 🦄 Very Simple
-- ⚡ Lightweight, < 2kb gzipped CSS + JS
+- 🦄 Simple and elegant
+- ⚡ Lightweight, 2kb gzipped CSS + JS
 - 😎 Modern
 - 📦 Zero Dependencies
 - 🔌 Compatible with all modern UI frameworks and libraries
 - 🎨 Easily customizable with themes and custom CSS
-
 
 ## Demo
 
@@ -242,25 +241,10 @@ All the UMD formats are available in the `node_modules/@ajmey/toaster/umd`. When
 
 ### minified + gzipped
 
-If using JS/CSS separately, the smallest total size will be: **1.4K + 811B = 2.211 kb**. Below is a full list of all min.gz file sizes:
+If using JS/CSS separately, the smallest total size will be: **1.4K + 772B = 2.172 kb**:
 
-#### esm:
-
-- index.min.js.gz: 2.3K
-- **toaster.min.js.gz: 1.4K**
-- themes.min.js.gz: 990B
-
-#### umd:
-
-- umd/index.min.js.gz: 3.0K
-- umd/toaster.min.js.gz: 2.2K
-- umd/themes.min.js.gz: 1.1K
-
-#### themes:
-
-- themes/theme-dark.min.css.gz: 815B
-- **themes/theme-default.min.css.gz: 811B**
-- themes/base.min.css.gz: 728B
+- **esm/toaster.min.js.gz**: 1.4K
+- **themes/theme-default.min.css.gz**: 772B
 
 ## Development
 
