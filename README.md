@@ -265,7 +265,7 @@ If using JS/CSS separately, the smallest total size will be: **1.4K + 772B = 2.1
 To publish a new version:
 
 - `yarn prep` and git add and commit all.
-- `npm version patch|minor|major` && `npm publish --access=public`
+- `npm version patch|minor|major` && `yarn build` && `npm publish --access=public`
 
 
 ## TODO
