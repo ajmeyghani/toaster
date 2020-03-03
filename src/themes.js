@@ -1,6 +1,6 @@
-import baseCss from "./base-css.js";
-import themeDefault from "./theme-default.js";
-import themeDark from "./theme-dark.js";
+import baseCss from "./base.css";
+import themeDefault from "./default.css";
+import themeDark from "./dark.css";
 
 const themes = {
   baseCss: baseCss,

@@ -239,28 +239,32 @@ All the UMD formats are available in the `node_modules/@ajmey/toaster/umd`. When
 If using JS/CSS separately, the smallest total size will be: **1.4K + 811B = 2.211 kb**. Below is a full list of all min.gz file sizes:
 
 #### esm:
-2.3K esm/index.min.js.gz
-**1.4K esm/toaster.min.js.gz**
-990B esm/themes.min.js.gz
+
+- index.min.js.gz: 2.3K
+- **toaster.min.js.gz: 1.4K**
+- themes.min.js.gz: 990B
 
 #### umd:
-3.0K umd/index.min.js.gz
-2.2K umd/toaster.min.js.gz
-1.1K umd/themes.min.js.gz
+
+- umd/index.min.js.gz: 3.0K
+- umd/toaster.min.js.gz: 2.2K
+- umd/themes.min.js.gz: 1.1K
 
 #### themes:
-815B themes/theme-dark.min.css.gz
-**811B themes/theme-default.min.css.gz**
-728B themes/base.min.css.gz
+
+- themes/theme-dark.min.css.gz: 815B
+- **themes/theme-default.min.css.gz: 811B**
+- themes/base.min.css.gz: 728B
 
 ## Development
 
 - Make sure to install the latest LTS version of Node: `nvm install --lts`.
 - Install yarn with `npm i -g yarn`.
 - Install dependencies with `yarn install`.
+- Run `yarn jsd` to start rollup in watch mode.
 - Update code in the `src/` folder.
 - Run the examples (gh-pages) locally: `yarn serverd`
-- Open `http://localhost:8081/gh-pages/index.dev*.html` to see the examples.
+- Open `http://localhost:8081/gh-pages/index.dev*.html` to check the functionality.
 - Run `yarn css` to minify all the CSS files and output the `themes` folder.
 - In order to support CSS injection and separate CSS files, make sure to update `src/*.css` files first, and then update `src/*.css.js` equivalent files.
 - Run `yarn build` to build both the css and js.
@@ -293,6 +297,7 @@ To publish a new version:
 - [x] Setup TestCafe, add some e2e tests.
 - [x] Figure out how to deal with umd if multiple index and toaster are loaded.
 - [x] Allow animation type in doc page.
+- [ ] Migrate aj-toaster to use this?
 - [ ] Make it easier to maintain CSS styles in css or js implementations.
 - [ ] Add events?
 - [ ] Add more e2e tests.

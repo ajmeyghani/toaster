@@ -1,14 +1,11 @@
 # dist
 /index*
-/core*
 /toaster*
 /dist
 /dist-dev
 /esm
 /umd
-gh-pages/src
-gh-pages/themes
-/themes/*.gz
+/themes/*
 /themes*
 
 # Logs
