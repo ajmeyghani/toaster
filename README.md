@@ -262,11 +262,9 @@ If using JS/CSS separately, the smallest total size will be: **1.4K + 772B = 2.1
 
 ## Maintainer
 
-- To update the website run `yarn website`.
-
 To publish a new version:
 
-- `yarn build && yarn website` and git add and commit all.
+- `yarn prep` and git add and commit all.
 - `npm version patch|minor|major` && `npm publish --access=public`
 
 
