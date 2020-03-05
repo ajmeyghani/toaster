@@ -69,7 +69,7 @@ The above methods all have the following signature:
 `[toastType](message?: string, options?: object) -> Promise<DOM Node>`
 
 - `message`: `string` the message to show
-- `options`: `object` plain object defining the options
+- `options` (optional): `object` plain object defining the options
     - `options.dismiss`: `number` auto dismiss a toast after `dismiss` milliseconds. If the value is falsy, auto-dismiss is disabled. Success toasts are automatically dismissed after `1500` ms. Other types of toasts are not dismissed automatically.
     - `options.title`: `string` title to be used for the toast.
     - `options.theme`: `string` you can override the theme used in initialization
@@ -255,9 +255,7 @@ If using JS/CSS separately, the smallest total size will be: **1.4K + 772B = 2.1
 - Update code in the `src/` folder.
 - Run the examples (gh-pages) locally: `yarn serverd`
 - Open `http://localhost:8081/gh-pages/index.dev*.html` to check the functionality.
-- Run `yarn css` to minify all the CSS files and output the `themes` folder.
-- Run `yarn build` to build both the css and js.
-- To run the e2e tests in watch mode, run `yarn server && yarn e2ew`. TestCafe will start testing whats served at 8080. The difference between 8080 and 8081 is that 8081 is for development (no caching), but 8080 has some caching so that TestCafe can work.
+- To run the e2e tests in watch mode, run `yarn server && yarn e2ew`. TestCafe will start testing whats served at 8080.
 
 ## Maintainer
 
