@@ -25,9 +25,9 @@ Latest and the greatest.
 
 1. Install by `yarn add @ajmey/toaster`, or `npm i @ajmey/toaster --save`.
 2. Load the toaster: `import toaster from "@ajmey/toaster"`.
-3. Call any [toast](#api) that you like, eg `toaster.success("Done!", { dismiss: 1500 })`.
+3. Call any [toast](#api), eg `toaster.success("Done!", { dismiss: 1500 })`.
 
-Using the default export above the CSS & JS are loaded automatically. This is the fastest way to get started, but the final bundle is a little larger. Ideally, you should load the CSS and the JS separately:
+Using the default export above, the CSS & JS are loaded automatically. This is the fastest way to get started, but the final bundle is a little larger. Ideally, you should load the CSS and the JS separately:
 
 **Load CSS**
 
@@ -51,6 +51,7 @@ import { useToaster } from "@ajmey/toaster/toaster";
 const toaster = useToaster({animation: "appear", theme: "default"});
 toaster.success();
 ```
+
 Please check out the [module formats](#modules) and [initialization](#initialization) sections for more details.
 
 ## API
@@ -69,13 +70,13 @@ The above methods all have the following signature:
 `[toastType](message?: string, options?: object) -> Promise<DOM Node>`
 
 - `message`: `string` the message to show
-- `options` (optional): `object` plain object defining the options
-    - `options.dismiss`: `number` auto dismiss a toast after `dismiss` milliseconds. If the value is falsy, auto-dismiss is disabled. Success toasts are automatically dismissed after `1500` ms. Other types of toasts are not dismissed automatically.
+- `options` (optional): `object` plain object defining the options:
+    - `options.dismiss`: `number` auto dismiss a toast after `dismiss` milliseconds. If the value is falsy, auto-dismiss is disabled. All toasts, except the Success toast, are dismissed by default after `1500`ms.
     - `options.title`: `string` title to be used for the toast.
     - `options.theme`: `string` you can override the theme used in initialization
     - `options.animation`: `string` you can also override the animation used initially
 
-**Return Value**: Each method will return a `promise` that resolves to the wrapper DOM element holding the toaster. The wrapper node is useful if you use set `dismiss` to `false` because you will have access to the wrapper node at that point.
+**Return Value**: each method will return a `promise` that resolves to the wrapper DOM element holding the toaster. The wrapper node is useful if you use set `dismiss` to `false` because you will have access to the wrapper node at that point.
 
 **Examples:**
 
@@ -99,14 +100,13 @@ toaster.clear().then(count => console.log("cleared toasters: ", count));
 
 ### `Initialization`
 
-There are two ways that you can initialize a toaster object:
+There are two ways that you can use a toaster object:
 
-1. Using the factory function `useToaster`, available in `@ajmey/toaster/toaster`: `useToaster(options?: object, injectStyles?: function)`
+1. `useToaster` factory function is available in `@ajmey/toaster/toaster`. The factory function does not inject any css by default unless an `injectStyles` function is given, `useToaster(options?: object, injectStyles?: function)`:
 
-    `useToaster` gives you more control over the initialization. Note that when this function is used, **no CSS will be injected to the page**. Below are the arguments details:
 
-    - `options.theme`: `string`, theme name, eg `default`, `dark`, etc. If no value is given `default` is used.
-    - `options.animation`: `string`, defining the name of the animation. Defaults to `appear`. Available values are `appear`.
+    - `options.theme`: `string`, theme name, eg `default`, `dark`, etc. If no value is given, `default` is used.
+    - `options.animation`: `string`, defining the name of the animation. Defaults to `appear` if no value is set.
 
     The `injectStyles` function can be passed in order to inject custom css to the page. Please see `gh-pages/index.dev3.html` for usage example.
 
@@ -120,7 +120,7 @@ There are two ways that you can initialize a toaster object:
 
 2. Using the default import
 
-    The default export on `@ajmey/toaster` is a `toaster` object with all default values. If you use this method, the CSS is also automatically injected to the page and nothing can be customized:
+    The default export on `@ajmey/toaster` is a `toaster` object with all default values. If you use this method, the CSS is also automatically injected to the page and the toaster instance is already initialized:
 
     Example:
 
@@ -133,7 +133,7 @@ There are two ways that you can initialize a toaster object:
 
 ## Themes
 
-You can override the colors of the toaster by including your own css after the toaster's css. For example, if you want to create a `light` theme, you can do:
+You can override the colors of the toaster by including your own css after the toaster's. For example, if you want to create a `light` theme, you can do:
 
 **CSS**
 
@@ -178,7 +178,7 @@ By default, toaster uses the `appear` animation. You can create new animations u
 In the example above, we create a new animation called `slide-down`. Once the CSS is defined, you can pass `animation` as an option to `useToaster`:
 
 ```js
-import { useToaster } from "@ajmey/toaster/toaster/toaster";
+import { useToaster } from "@ajmey/toaster/toaster";
 const toaster = useToaster({ animation: "slide-down" });
 ```
 
@@ -217,11 +217,8 @@ import {useToaster, injectStyles} from "@ajmey/toaster/toaster";
 All the ESM modules are importable from the root `@ajmey/toaster/<module>`:
 
 - index.js
-- index.min.js
 - toaster.js
-- toaster.min.js
 - themes.js
-- themes.min.js
 
 **UDM**
 
