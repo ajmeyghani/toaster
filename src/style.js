@@ -19,7 +19,7 @@ const injectStyles = function injectStyles(themes) {
 
   handleInsert.ajmStyleInjector = true;
   return handleInsert;
-}
+};
 
 const removeInjectedStyles = () => {
   const styles = loadedStyles();
