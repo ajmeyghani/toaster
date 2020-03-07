@@ -251,7 +251,7 @@ If using JS/CSS separately, the smallest total size will be: **1.4K + 772B = 2.1
 - Run `yarn dev` to start rollup and css watch.
 - Update code in the `src/` folder.
 - Run the examples (gh-pages) locally: `yarn serverd`
-- Open `http://localhost:8081/gh-pages/index.dev*.html` to check the functionality.
+- Open `http://localhost:8080/gh-pages/index.dev*.html` to check the functionality.
 - To run the e2e tests in watch mode, run `yarn server && yarn e2ew`. TestCafe will start testing whats served at 8080.
 
 ## Maintainer

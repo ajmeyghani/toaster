@@ -21,7 +21,7 @@
     "prep": "yarn build && yarn gh",
     "gzip": "gzip -k esm/*.min.js && gzip -k umd/*.min.js && gzip -k themes/*.min.css",
     "server": "http-server -p 8080",
-    "serverd": "http-server -p 8081 -c-1"
+    "serverd": "http-server -p 8080 -c-1"
   },
   "repository": {
     "type": "git",
