@@ -98,7 +98,34 @@ If you want to clear the active toast, simply call `toaster.clear()`. Returns a 
 toaster.clear().then(count => console.log("cleared toasters: ", count));
 ```
 
-### `Initialization`
+`on(eventName, callback)`: can be used to add event handlers:
+
+  - `eventName`: `string` the event name, possible values are: `beforeLoad`, `loaded`, `beforeCleared`, `cleared`.
+
+  - `callback`: `function` the event handler callback to be called
+
+**Examples:**
+
+  ```js
+  import toaster from "@ajmey/toaster";
+  toaster.on("beforeLoad", () => {
+    console.log("before loaded");
+  });
+
+  toaster.on("loaded", () => {
+    console.log("toaster loaded.");
+  });
+
+  toaster.on("beforeClear", () => {
+    console.log("beforeClear");
+  });
+
+  toaster.on("cleared", () => {
+    console.log("toast cleared.");
+  });
+  ```
+
+### Initialization
 
 There are two ways that you can use a toaster object:
 
@@ -280,8 +307,8 @@ To publish a new version:
 - [x] Figure out how to deal with umd if multiple index and toaster are loaded.
 - [x] Allow animation type in doc page.
 - [x] Make it easier to maintain CSS styles in css or js implementations.
+- [x] Add events + docs?
 - [ ] Migrate aj-toaster to use this?
-- [ ] Add events + docs?
 - [ ] Add more e2e tests.
 - [ ] Add unit tests.
 - [ ] Add travis? + sauce labs?
