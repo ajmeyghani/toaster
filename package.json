@@ -6,7 +6,8 @@
   "scripts": {
     "predev": "yarn clean",
     "dev": "run-p jsw cssw",
-    "e2e": "testcafe chrome e2e/a.js --disable-page-caching",
+    "d": "yarn dev",
+    "e2e": "testcafe chrome e2e/toaster.e2e.js --disable-page-caching",
     "e2ew": "yarn e2e --live --dev --colors",
     "t": "yarn test",
     "clean": "rm -rf index* toaster* themes*",

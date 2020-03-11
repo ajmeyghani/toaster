@@ -21,15 +21,30 @@
         --ajmt-duration: 300ms;
         --ajmt-easing:   ease-in-out;
       }
+
+      .ajmtoaster.--animation-slide-down,
+      .ajmtoaster.--animation-slide-down.--active {
+          transition: transform var(--ajmt-duration) var(--ajmt-easing) 0ms,
+          opacity var(--ajmt-duration) var(--ajmt-easing) 50ms;
+      }
+      .ajmtoaster.--animation-slide-down {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      .ajmtoaster.--animation-slide-down.--active {
+        opacity: 1;
+        transform: translateY(0);
+      }
       `;
 
       let myThemes = {
         fancy: fancyDef + animations + baseCss
       };
 
-      window.toaster = useToaster({
-          animation: "appear",
-          theme: "fancy",
+      window.toaster = useToaster(
+        {
+          animation: "slide-down",
+          theme: "fancy"
         },
         injectStyles(myThemes)
       );

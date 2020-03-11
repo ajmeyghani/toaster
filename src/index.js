@@ -1,7 +1,7 @@
 import themes from "./themes.js";
 import { useToaster, injectStyles } from "./toaster.js";
 const toaster = useToaster(
-  { animation: "slide-down", theme: "default" },
+  { animation: "appear", theme: "default" },
   injectStyles(themes)
 );
 export default toaster;

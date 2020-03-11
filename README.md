@@ -279,8 +279,8 @@ To publish a new version:
 - [x] Setup TestCafe, add some e2e tests.
 - [x] Figure out how to deal with umd if multiple index and toaster are loaded.
 - [x] Allow animation type in doc page.
+- [x] Make it easier to maintain CSS styles in css or js implementations.
 - [ ] Migrate aj-toaster to use this?
-- [ ] Make it easier to maintain CSS styles in css or js implementations.
 - [ ] Add events?
 - [ ] Add more e2e tests.
 - [ ] Add unit tests.
