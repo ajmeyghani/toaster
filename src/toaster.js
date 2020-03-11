@@ -41,7 +41,7 @@ function Toaster(o = {}, injectFn) {
 
 const useToaster = (o, injectFn) => new Toaster(o, injectFn);
 
-const callToast = (type, message, config, o) => {
+const callToast = (type, message, config, events) => {
   removeInjectedStyles();
   if (config.injectFn) {
     config.injectFn(config.theme);
@@ -52,42 +52,49 @@ const callToast = (type, message, config, o) => {
   }
 
   let dismiss = false;
-  const title = o.title ? String(o.title) : Toaster.titles[type];
+  const title = config.title ? String(config.title) : Toaster.titles[type];
 
   if (type === Toaster.SUCCESS) {
-    dismiss = isUndefined(o.dismiss) ? true : o.dismiss;
+    dismiss = isUndefined(config.dismiss) ? true : config.dismiss;
   } else {
-    dismiss = o.dismiss;
+    dismiss = config.dismiss;
   }
 
   return toast({
     ...config,
-    ...o,
     type,
     title,
     message,
     dismiss
-  });
+  }, events);
 };
 
+Toaster.prototype.events = {};
+
+const events = Toaster.prototype.events;
+
 function success(message = "", o = {}) {
-  return callToast(Toaster.SUCCESS, message, this.config, o);
+  return callToast(Toaster.SUCCESS, message, {...this.config, ...o}, events);
 }
 
 function failure(message = "", o = {}) {
-  return callToast(Toaster.FAILURE, message, this.config, o);
+  return callToast(Toaster.FAILURE, message, {...this.config, ...o}, events);
 }
 
 function info(message = "", o = {}) {
-  return callToast(Toaster.INFO, message, this.config, o);
+  return callToast(Toaster.INFO, message, {...this.config, ...o}, events);
 }
 
 function warning(message = "", o = {}) {
-  return callToast(Toaster.WARNING, message, this.config, o);
+  return callToast(Toaster.WARNING, message, {...this.config, ...o}, events);
 }
 
 function clear() {
-  return clearToasts();
+  return clearToasts(Toaster.prototype.events);
+}
+
+function on(eventName, callback) {
+  this.events[eventName] = callback;
 }
 
 Object.assign(Toaster.prototype, {
@@ -97,7 +104,8 @@ Object.assign(Toaster.prototype, {
   failure,
   info,
   warning,
-  clear
+  clear,
+  on
 });
 
 Object.freeze(Toaster.prototype);

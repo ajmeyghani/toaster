@@ -281,7 +281,7 @@ To publish a new version:
 - [x] Allow animation type in doc page.
 - [x] Make it easier to maintain CSS styles in css or js implementations.
 - [ ] Migrate aj-toaster to use this?
-- [ ] Add events?
+- [ ] Add events + docs?
 - [ ] Add more e2e tests.
 - [ ] Add unit tests.
 - [ ] Add travis? + sauce labs?

@@ -1,3 +1,4 @@
+import { isFunction } from "./value.js";
 let dismissTimeout;
 const DEFAULT_DISMISS_AFTER = 1500;
 
@@ -35,7 +36,7 @@ const insertToast = (wrapper, fragment, toasterTemplate) => {
   return wrapper;
 };
 
-const toast = o => {
+const toast = (o, events) => {
   if (dismissTimeout) {
     window.clearTimeout(dismissTimeout);
   }
@@ -50,23 +51,30 @@ const toast = o => {
   );
 
   for (const b of dismissButtons) {
-    b.addEventListener("click", clearToasts);
+    b.addEventListener("click", () => clearToasts(events));
   }
 
   if (o.dismiss) {
     o.dismiss = Number.isInteger(o.dismiss) ? o.dismiss : DEFAULT_DISMISS_AFTER;
-    dismissTimeout = window.setTimeout(clearToasts, o.dismiss);
+    dismissTimeout = window.setTimeout(() => clearToasts(events), o.dismiss);
+  }
+
+  if (isFunction(events.beforeLoad)) {
+    events.beforeLoad();
   }
 
   return new Promise(r => {
     window.setTimeout(() => {
       wrapper.classList.add("--active");
+      if (isFunction(events.loaded)) {
+        events.loaded();
+      }
       r(wrapper);
     }, 200);
   });
 };
 
-const clearToasts = () => {
+const clearToasts = (events) => {
   const toasts = Array.from(document.getElementsByClassName("js-ajmtoaster"));
   let count = toasts.length;
 
@@ -92,6 +100,10 @@ const clearToasts = () => {
 
   const maxDuration = window.Math.max(...durations);
 
+  if (events && isFunction(events.beforeClear)) {
+    events.beforeClear();
+  }
+
   return new Promise(r => {
     window.setTimeout(() => {
       for (const t of toasts) {
@@ -101,6 +113,9 @@ const clearToasts = () => {
       }
 
       r(count);
+      if (events && isFunction(events.cleared)) {
+        events.cleared();
+      }
     }, maxDuration + 100);
   });
 };

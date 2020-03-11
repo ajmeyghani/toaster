@@ -8,6 +8,21 @@
     <script type="module">
       import toaster from "../esm/index.js";
       window.toaster = toaster;
+      toaster.on("beforeLoad", () => {
+        console.log("before loaded");
+      });
+
+      toaster.on("loaded", () => {
+        console.log("toaster loaded.");
+      });
+
+      toaster.on("beforeClear", () => {
+        console.log("beforeClear");
+      });
+
+      toaster.on("cleared", () => {
+        console.log("toast cleared.");
+      });
     </script>
     <script type="module" src="./docs.js"></script>
     <title>dev1</title>
