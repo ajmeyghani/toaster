@@ -1,4 +1,7 @@
-import { isFunction } from "./value.js";
+import { isFunction, isUndefined, isString, isBoolean } from "./value.js";
+import { removeInjectedStyles } from "./style.js";
+import { titles, types } from "./titles.js";
+
 let dismissTimeout;
 const DEFAULT_DISMISS_AFTER = 1500;
 
@@ -36,14 +39,31 @@ const insertToast = (wrapper, fragment, toasterTemplate) => {
   return wrapper;
 };
 
-const toast = (o, events) => {
+const toast = (type, message, options, events) => {
   if (dismissTimeout) {
     window.clearTimeout(dismissTimeout);
   }
 
   clearToasts();
 
-  const { wrapper, fragment, toasterTemplate } = makeToastNode(o);
+  removeInjectedStyles();
+  if (options.injectFn) {
+    options.injectFn(options.theme);
+  }
+
+  if (!isString(message)) {
+    message = "";
+  }
+
+  const title = options.title ? String(options.title) : titles[type];
+
+  const { wrapper, fragment, toasterTemplate } = makeToastNode({
+    ...options,
+    type,
+    title,
+    message
+  });
+
   insertToast(wrapper, fragment, toasterTemplate);
 
   const dismissButtons = Array.from(
@@ -54,9 +74,23 @@ const toast = (o, events) => {
     b.addEventListener("click", () => clearToasts(events));
   }
 
-  if (o.dismiss) {
-    o.dismiss = Number.isInteger(o.dismiss) ? o.dismiss : DEFAULT_DISMISS_AFTER;
-    dismissTimeout = window.setTimeout(() => clearToasts(events), o.dismiss);
+  if (type === types.SUCCESS) {
+    if (
+      isUndefined(options.dismiss) ||
+      (!Number.isInteger(options.dismiss) && options.dismiss !== false)
+    ) {
+      options.dismiss = DEFAULT_DISMISS_AFTER;
+    }
+  } else {
+    options.dismiss = Number.isInteger(options.dismiss) ? options.dismiss :
+    options.dismiss === true ? DEFAULT_DISMISS_AFTER : false
+  }
+
+  if (options.dismiss) {
+    dismissTimeout = window.setTimeout(
+      () => clearToasts(events),
+      options.dismiss
+    );
   }
 
   if (isFunction(events.beforeLoad)) {
@@ -74,7 +108,7 @@ const toast = (o, events) => {
   });
 };
 
-const clearToasts = (events) => {
+const clearToasts = events => {
   const toasts = Array.from(document.getElementsByClassName("js-ajmtoaster"));
   let count = toasts.length;
 

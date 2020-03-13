@@ -1,24 +1,8 @@
 import { version } from "../package.json";
-import { isUndefined, isString, isFunction } from "./value.js";
+import { isUndefined, isString, isFunction, isPlainObject } from "./value.js";
 import { toast, clearToasts } from "./toast.js";
 import { loadedStyles, removeInjectedStyles, injectStyles } from "./style.js";
-
-Toaster.type = Symbol("#toaster");
-Toaster.version = version;
-
-Object.assign(Toaster, {
-  SUCCESS: "success",
-  FAILURE: "failure",
-  INFO: "info",
-  WARNING: "warning"
-});
-
-Toaster.titles = {
-  [Toaster.SUCCESS]: "Success!",
-  [Toaster.FAILURE]: "Oops...",
-  [Toaster.INFO]: "Note!",
-  [Toaster.WARNING]: "Warning!"
-};
+import { titles, types } from "./titles.js";
 
 function Toaster(o = {}, injectFn) {
   if (injectFn && (!isFunction(injectFn) || !injectFn.ajmStyleInjector)) {
@@ -27,7 +11,7 @@ function Toaster(o = {}, injectFn) {
 
   const defaults = {
     theme: "default",
-    animation: "appear"
+    animation: "appear",
   };
 
   this.config = { ...defaults, ...o };
@@ -39,54 +23,20 @@ function Toaster(o = {}, injectFn) {
   }
 }
 
-const useToaster = (o, injectFn) => new Toaster(o, injectFn);
-
-const callToast = (type, message, config, events) => {
-  removeInjectedStyles();
-  if (config.injectFn) {
-    config.injectFn(config.theme);
-  }
-
-  if (!isString(message)) {
-    message = "";
-  }
-
-  let dismiss = false;
-  const title = config.title ? String(config.title) : Toaster.titles[type];
-
-  if (type === Toaster.SUCCESS) {
-    dismiss = isUndefined(config.dismiss) ? true : config.dismiss;
-  } else {
-    dismiss = config.dismiss;
-  }
-
-  return toast({
-    ...config,
-    type,
-    title,
-    message,
-    dismiss
-  }, events);
-};
-
+Toaster.version = version;
+Toaster.type = Symbol("#toaster");
+Toaster.titles = titles;
+Object.assign(Toaster, types);
 Toaster.prototype.events = {};
-
 const events = Toaster.prototype.events;
 
-function success(message = "", o = {}) {
-  return callToast(Toaster.SUCCESS, message, {...this.config, ...o}, events);
-}
-
-function failure(message = "", o = {}) {
-  return callToast(Toaster.FAILURE, message, {...this.config, ...o}, events);
-}
-
-function info(message = "", o = {}) {
-  return callToast(Toaster.INFO, message, {...this.config, ...o}, events);
-}
-
-function warning(message = "", o = {}) {
-  return callToast(Toaster.WARNING, message, {...this.config, ...o}, events);
+function toastMaker(type) {
+  return function(message = "", o = {}) {
+    if (isPlainObject(message)) {
+      o = message;
+    }
+    return toast(type, message, { ...this.config, ...o }, events);
+  };
 }
 
 function clear() {
@@ -97,13 +47,15 @@ function on(eventName, callback) {
   this.events[eventName] = callback;
 }
 
+const useToaster = (o, injectFn) => new Toaster(o, injectFn);
+
 Object.assign(Toaster.prototype, {
   [Toaster.type]: Toaster.type,
   version: Toaster.version,
-  success,
-  failure,
-  info,
-  warning,
+  success: toastMaker(Toaster.SUCCESS),
+  failure: toastMaker(Toaster.FAILURE),
+  info: toastMaker(Toaster.INFO),
+  warning: toastMaker(Toaster.WARNING),
   clear,
   on
 });

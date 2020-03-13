@@ -12,7 +12,7 @@ const isBoolean = v => typeof v === "boolean";
 
 const isSymbol = v => typeof v === "symbol";
 
-const isObj = v =>
+const isObject = v =>
   typeof v !== "function" && typeof v === "object" && !isNull(v);
 
 const isPlainObject = v =>
@@ -31,7 +31,7 @@ const isTruthy = v => {
 };
 
 const isInstance = (i, f) =>
-  isObj(i) && Reflect.getPrototypeOf(i) === f.prototype;
+  isObject(i) && Reflect.getPrototypeOf(i) === f.prototype;
 
 export {
   UNDEFINED,
@@ -41,7 +41,7 @@ export {
   isString,
   isBoolean,
   isSymbol,
-  isObj,
+  isObject,
   isPlainObject,
   isFunction,
   isAbsent,
