@@ -14,6 +14,7 @@ h1 {
   font-family: sans-serif;
   margin-top: 2rem;
 }
+
 .page {
   padding: 1rem;
   width: 960px;
@@ -36,4 +37,11 @@ h1 {
 }
 .hspaced > *:last-child {
   margin-right: 0;
+}
+
+.btn-transparent {
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+}
 }

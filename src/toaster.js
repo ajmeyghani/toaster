@@ -14,10 +14,9 @@ function Toaster(o = {}, injectFn) {
     animation: "appear",
   };
 
-  this.config = { ...defaults, ...o };
-  this.config.injectFn = injectFn;
+  this.config = { ...defaults, ...o, injectFn };
 
-  if (this.config.injectFn) {
+  if (injectFn) {
     removeInjectedStyles();
     injectFn(this.config.theme);
   }
