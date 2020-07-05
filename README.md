@@ -1,8 +1,7 @@
+
 # Vanilla Toaster
 
 Simple toaster in vanilla JavaScript for modern browsers.
-
-**🚀 Work in progress, do not use in production yet.**
 
 ## Why
 
@@ -287,28 +286,3 @@ To publish a new version:
 
 - `yarn prep` and git add and commit all.
 - `npm version patch|minor|major` && `yarn build` && `npm publish --access=public`
-
-
-## TODO
-
-- [x] Basic toaster working.
-- [x] Add default styles.
-- [x] Add a nice default theme.
-- [x] Allow defining custom themes.
-- [x] Add docs on how to override styles.
-- [x] Configure default behavior and options when importing.
-- [x] Add animations for default theme.
-- [x] Add gh pages
-- [x] Add different types of animation?
-- [x] Add build task to bundle up and minify js, webpack?
-- [x] For umd build, transpile -> es5
-- [x] Make doc page for each way the module can be loaded/imported.
-- [x] Setup TestCafe, add some e2e tests.
-- [x] Figure out how to deal with umd if multiple index and toaster are loaded.
-- [x] Allow animation type in doc page.
-- [x] Make it easier to maintain CSS styles in css or js implementations.
-- [x] Add events + docs?
-- [ ] Migrate aj-toaster to use this?
-- [ ] Add more e2e tests.
-- [ ] Add unit tests.
-- [ ] Add travis? + sauce labs?
