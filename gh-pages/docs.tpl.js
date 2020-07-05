@@ -1,6 +1,15 @@
 const template = `
 <div class="sections">
-  <h1 class="subtitle is-2">🍞 Vanilla Toaster</h1>
+  <h1 class="subtitle is-2">
+    <button
+      class="btn-transparent"
+      id="test-success-button-default"
+      v-on:click="toaster.success('success toaster should dismiss automatically')"
+    >
+      🍞
+    </button>
+    Vanilla Toaster
+  </h1>
   <h2 class="subtitle is-4">Make a Toast</h2>
 
   <slot></slot>
@@ -54,21 +63,29 @@ const template = `
   </section>
 
   <p>
-    <strong>Note:</strong> if <code>options.dismiss</code> is set to a falsy value, then the toast won't auto-dismiss. Otherwise, if the provided value is a valid number, that number (in ms) will be used to auto-dismiss. If the value is not a valid number, the default value <code>1500</code> is used.
+    <strong>Note:</strong> if <code>options.dismiss</code> is set to a falsy
+    value, then the toast won't auto-dismiss. Otherwise, if the provided value
+    is a valid number, that number (in ms) will be used to auto-dismiss. If the
+    value is not a valid number, the default value <code>1500</code> is used.
   </p>
 
   <section class="sections">
     <p>Function call:</p>
-      <pre>toast("{{ message }}", options). where toast: success|failure|info|warning</pre>
+    <pre>
+toast("{{ message }}", options). where toast is one of success|failure|info|warning</pre
+    >
     <p>Options:</p>
     <pre>{{ options }}</pre>
   </section>
 
   <section class="sections">
-    <button v-on:click="toaster.clear().then(r => console.log(r))" class="button is-outlined">Clear Toaster</button>
+    <button
+      v-on:click="toaster.clear().then(r => console.log(r))"
+      class="button is-outlined"
+    >
+      Clear Toaster
+    </button>
     <pre>toaster.clear()</pre>
   </section>
 </div>
-`;
-
-export default template;
+`; export default template;

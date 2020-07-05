@@ -5,7 +5,7 @@ import themeDefault from "./default.css";
 const themes = {
   animations,
   baseCss,
-  default: themeDefault + baseCss
+  default: themeDefault + animations + baseCss
 };
 
 export default themes;

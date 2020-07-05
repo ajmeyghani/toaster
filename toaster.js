@@ -1,4 +1,4 @@
-var version = "0.4.0";
+var version = "0.5.0";
 
 const UNDEFINED = void 0;
 
@@ -6,7 +6,54 @@ const isUndefined = v => v === UNDEFINED;
 
 const isString = v => typeof v === "string";
 
+const isPlainObject = v =>
+  Object.prototype.toString.call(v) === "[object Object]";
+
 const isFunction = v => typeof v === "function";
+
+const DEFAULT_STYLES_NAME = "default_ajmey_toaster";
+
+const loadedStyles = (styleName = DEFAULT_STYLES_NAME) => {
+  const styles = Array.from(document.getElementsByTagName("style"));
+  return styles.filter(v => v.dataset.styleName === styleName);
+};
+
+const injectStyles = function injectStyles(themes) {
+  function handleInsert(theme) {
+    const head = document.head || document.getElementsByTagName("head")[0];
+    const style = document.createElement("style");
+    style.setAttribute("data-style-name", DEFAULT_STYLES_NAME);
+    head.appendChild(style);
+    style.type = "text/css";
+    const selectedTheme = themes[theme] || themes["default"];
+    style.appendChild(document.createTextNode(selectedTheme));
+    return style;
+  }
+
+  handleInsert.ajmStyleInjector = true;
+  return handleInsert;
+};
+
+const removeInjectedStyles = () => {
+  const styles = loadedStyles();
+  for (const s of styles) {
+    s.parentNode.removeChild(s);
+  }
+};
+
+const types = {
+  SUCCESS: "success",
+  FAILURE: "failure",
+  INFO: "info",
+  WARNING: "warning"
+};
+
+const titles = {
+  [types.SUCCESS]: "Success!",
+  [types.FAILURE]: "Oops...",
+  [types.INFO]: "Note!",
+  [types.WARNING]: "Warning!"
+};
 
 let dismissTimeout;
 const DEFAULT_DISMISS_AFTER = 1500;
@@ -45,14 +92,31 @@ const insertToast = (wrapper, fragment, toasterTemplate) => {
   return wrapper;
 };
 
-const toast = o => {
+const toast = (type, message, options, events) => {
   if (dismissTimeout) {
     window.clearTimeout(dismissTimeout);
   }
 
   clearToasts();
 
-  const { wrapper, fragment, toasterTemplate } = makeToastNode(o);
+  removeInjectedStyles();
+  if (options.injectFn) {
+    options.injectFn(options.theme);
+  }
+
+  if (!isString(message)) {
+    message = "";
+  }
+
+  const title = options.title ? String(options.title) : titles[type];
+
+  const { wrapper, fragment, toasterTemplate } = makeToastNode({
+    ...options,
+    type,
+    title,
+    message
+  });
+
   insertToast(wrapper, fragment, toasterTemplate);
 
   const dismissButtons = Array.from(
@@ -60,23 +124,44 @@ const toast = o => {
   );
 
   for (const b of dismissButtons) {
-    b.addEventListener("click", clearToasts);
+    b.addEventListener("click", () => clearToasts(events));
   }
 
-  if (o.dismiss) {
-    o.dismiss = Number.isInteger(o.dismiss) ? o.dismiss : DEFAULT_DISMISS_AFTER;
-    dismissTimeout = window.setTimeout(clearToasts, o.dismiss);
+  if (type === types.SUCCESS) {
+    if (
+      isUndefined(options.dismiss) ||
+      (!Number.isInteger(options.dismiss) && options.dismiss !== false)
+    ) {
+      options.dismiss = DEFAULT_DISMISS_AFTER;
+    }
+  } else {
+    options.dismiss = Number.isInteger(options.dismiss) ? options.dismiss :
+    options.dismiss === true ? DEFAULT_DISMISS_AFTER : false;
+  }
+
+  if (options.dismiss) {
+    dismissTimeout = window.setTimeout(
+      () => clearToasts(events),
+      options.dismiss
+    );
+  }
+
+  if (isFunction(events.beforeLoad)) {
+    events.beforeLoad();
   }
 
   return new Promise(r => {
     window.setTimeout(() => {
       wrapper.classList.add("--active");
+      if (isFunction(events.loaded)) {
+        events.loaded();
+      }
       r(wrapper);
     }, 200);
   });
 };
 
-const clearToasts = () => {
+const clearToasts = events => {
   const toasts = Array.from(document.getElementsByClassName("js-ajmtoaster"));
   let count = toasts.length;
 
@@ -102,6 +187,10 @@ const clearToasts = () => {
 
   const maxDuration = window.Math.max(...durations);
 
+  if (events && isFunction(events.beforeClear)) {
+    events.beforeClear();
+  }
+
   return new Promise(r => {
     window.setTimeout(() => {
       for (const t of toasts) {
@@ -111,55 +200,11 @@ const clearToasts = () => {
       }
 
       r(count);
+      if (events && isFunction(events.cleared)) {
+        events.cleared();
+      }
     }, maxDuration + 100);
   });
-};
-
-const DEFAULT_STYLES_NAME = "default_ajmey_toaster";
-
-const loadedStyles = (styleName = DEFAULT_STYLES_NAME) => {
-  const styles = Array.from(document.getElementsByTagName("style"));
-  return styles.filter(v => v.dataset.styleName === styleName);
-};
-
-const injectStyles = function injectStyles(themes) {
-  function handleInsert(theme) {
-    const head = document.head || document.getElementsByTagName("head")[0];
-    const style = document.createElement("style");
-    style.setAttribute("data-style-name", DEFAULT_STYLES_NAME);
-    head.appendChild(style);
-    style.type = "text/css";
-    const selectedTheme = themes[theme] || themes["default"];
-    style.appendChild(document.createTextNode(selectedTheme));
-    return style;
-  }
-
-  handleInsert.ajmStyleInjector = true;
-  return handleInsert;
-};
-
-const removeInjectedStyles = () => {
-  const styles = loadedStyles();
-  for (const s of styles) {
-    s.parentNode.removeChild(s);
-  }
-};
-
-Toaster.type = Symbol("#toaster");
-Toaster.version = version;
-
-Object.assign(Toaster, {
-  SUCCESS: "success",
-  FAILURE: "failure",
-  INFO: "info",
-  WARNING: "warning"
-});
-
-Toaster.titles = {
-  [Toaster.SUCCESS]: "Success!",
-  [Toaster.FAILURE]: "Oops...",
-  [Toaster.INFO]: "Note!",
-  [Toaster.WARNING]: "Warning!"
 };
 
 function Toaster(o = {}, injectFn) {
@@ -169,77 +214,52 @@ function Toaster(o = {}, injectFn) {
 
   const defaults = {
     theme: "default",
-    animation: "appear"
+    animation: "appear",
   };
 
-  this.config = { ...defaults, ...o };
-  this.config.injectFn = injectFn;
+  this.config = { ...defaults, ...o, injectFn };
 
-  if (this.config.injectFn) {
+  if (injectFn) {
     removeInjectedStyles();
     injectFn(this.config.theme);
   }
 }
 
-const useToaster = (o, injectFn) => new Toaster(o, injectFn);
+Toaster.version = version;
+Toaster.type = Symbol("#toaster");
+Toaster.titles = titles;
+Object.assign(Toaster, types);
+Toaster.prototype.events = {};
+const events = Toaster.prototype.events;
 
-const callToast = (type, message, config, o) => {
-  removeInjectedStyles();
-  if (config.injectFn) {
-    config.injectFn(config.theme);
-  }
-
-  if (!isString(message)) {
-    message = "";
-  }
-
-  let dismiss = false;
-  const title = o.title ? String(o.title) : Toaster.titles[type];
-
-  if (type === Toaster.SUCCESS) {
-    dismiss = isUndefined(o.dismiss) ? true : o.dismiss;
-  } else {
-    dismiss = o.dismiss;
-  }
-
-  return toast({
-    ...config,
-    ...o,
-    type,
-    title,
-    message,
-    dismiss
-  });
-};
-
-function success(message = "", o = {}) {
-  return callToast(Toaster.SUCCESS, message, this.config, o);
-}
-
-function failure(message = "", o = {}) {
-  return callToast(Toaster.FAILURE, message, this.config, o);
-}
-
-function info(message = "", o = {}) {
-  return callToast(Toaster.INFO, message, this.config, o);
-}
-
-function warning(message = "", o = {}) {
-  return callToast(Toaster.WARNING, message, this.config, o);
+function toastMaker(type) {
+  return function(message = "", o = {}) {
+    if (isPlainObject(message)) {
+      o = message;
+    }
+    return toast(type, message, { ...this.config, ...o }, events);
+  };
 }
 
 function clear() {
-  return clearToasts();
+  return clearToasts(Toaster.prototype.events);
 }
+
+function on(eventName, callback) {
+  this.events[eventName] = callback;
+}
+
+const useToaster = (o, injectFn) => new Toaster(o, injectFn);
 
 Object.assign(Toaster.prototype, {
   [Toaster.type]: Toaster.type,
   version: Toaster.version,
-  success,
-  failure,
-  info,
-  warning,
-  clear
+  success: toastMaker(Toaster.SUCCESS),
+  failure: toastMaker(Toaster.FAILURE),
+  info: toastMaker(Toaster.INFO),
+  warning: toastMaker(Toaster.WARNING),
+  clear,
+  on
 });
 
 Object.freeze(Toaster.prototype);

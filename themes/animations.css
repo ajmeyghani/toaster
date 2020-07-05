@@ -1,7 +1,6 @@
-/* Animation 1: appear */
 .ajmtoaster.--animation-appear,
 .ajmtoaster.--animation-appear.--active {
-    transition: transform var(--ajmt-duration) var(--ajmt-easing) 0ms,
+  transition: transform var(--ajmt-duration) var(--ajmt-easing) 0ms,
     opacity var(--ajmt-duration) var(--ajmt-easing) 50ms;
 }
 .ajmtoaster.--animation-appear {
