@@ -1,6 +1,6 @@
 {
   "name": "@ajmey/toaster",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Simple toaster in vanilla JavaScript for modern browsers.",
   "main": "index.js",
   "scripts": {
