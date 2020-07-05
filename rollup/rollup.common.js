@@ -1,4 +1,4 @@
-import babel from "rollup-plugin-babel";
+import babel from "@rollup/plugin-babel";
 import json from "@rollup/plugin-json";
 import replace from "@rollup/plugin-replace";
 import commonjs from "@rollup/plugin-commonjs";
